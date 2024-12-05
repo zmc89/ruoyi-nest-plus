@@ -779,8 +779,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '000000', 103, 'admin', 'nest-admin', '00', 'ry@163.com', '15888888888', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-05 01:24:26.448978', '管理员', '', '0000-00-00 00:00:00');
-INSERT INTO `sys_user` VALUES (2, '', 105, 'ry', 'nest-admin', '00', 'ry@qq.com', '15666666666', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', NULL, '测试员', '', '0000-00-00 00:00:00');
+INSERT INTO `sys_user` VALUES (1, '000000', 103, 'admin', 'nest-admin', '00', 'ry@163.com', '15888888888', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-05 01:24:26.448978', '管理员', '', '2024-12-05 01:24:26.448978');
+INSERT INTO `sys_user` VALUES (2, '', 105, 'ry', 'nest-admin', '00', 'ry@qq.com', '15666666666', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', NULL, '测试员', '', '2024-12-05 01:24:26.448978');
 
 -- ----------------------------
 -- Table structure for sys_user_post

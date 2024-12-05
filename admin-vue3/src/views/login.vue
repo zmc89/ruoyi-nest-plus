@@ -6,23 +6,24 @@
   <div class="login">
     <el-form ref="loginRef" :model="loginForm.model" :rules="loginForm.rules" class="login-form">
       <h3 class="title">nest-admin后台管理系统</h3>
-      <el-form-item prop="tenantId">
+      <el-form-item prop="tentanId">
         <el-select
-          v-model="loginForm.model.tenantId"
+          style="width: 100%"
+          size="large"
+          v-model="loginForm.model.tentanId"
           multiple
           filterable
           remote
           reserve-keyword
-          placeholder="Please enter a keyword"
+          placeholder="请填写门店名称"
           :remote-method="remoteMethod"
           :loading="loading"
-          style="width: 240px"
         >
           <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
+            v-for="item in tenantList"
+            :key="item.tenantId"
+            :label="item.tenantName"
+            :value="item.tenantId"
           />
         </el-select>
       </el-form-item>
@@ -65,20 +66,22 @@
 </template>
 
 <script setup>
+import { listAllTenant } from '@/api/login'
 import useUserStore from '@/store/modules/user'
 import useAuthCode from '@/hooks/useAuthCode'
-
+import { onMounted } from 'vue'
 const userStore = useUserStore()
 const authCodeInfo = useAuthCode.authCodeInfo
 const route = useRoute()
 const router = useRouter()
 const loginRef = ref()
+const tenantList = ref([])
+const loading = ref(false)
 
 const loginForm = reactive({
   model: {
-    username: 'admin',
-    password: '123456',
-    tenantId:'',
+    username: '',
+    password: '',
     rememberMe: false,
     code: '',
     uuid: ''
@@ -126,8 +129,32 @@ function handleLogin() {
   })
 }
 
+const remoteMethod = (query) => {
+  if (query) {
+    loading.value = true
+    setTimeout(() => {
+      loading.value = false
+     getAllTenant(query)
+    }, 200)
+  }
+}
+
+const getAllTenant = (keyWord) => {
+  listAllTenant({
+    tenantName: keyWord
+  }).then(res => {
+    if (res.code === 0) {
+        this.tenantList = res.data
+    }
+  })
+}
+
 useAuthCode.getValidateCode(loginForm.model, false)
 loginForm.model = useAuthCode.getUserCookie(loginForm.model)
+
+onMounted(() => {
+  getAllTenant()
+})
 </script>
 
 <style lang="scss" scoped>

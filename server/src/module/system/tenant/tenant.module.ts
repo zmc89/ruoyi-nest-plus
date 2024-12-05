@@ -9,5 +9,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([SysTenantEntity])],
   controllers: [SysTenantController],
   providers: [SysTenantService],
+  exports: [SysTenantService],
 })
 export class SysTenantModule {}

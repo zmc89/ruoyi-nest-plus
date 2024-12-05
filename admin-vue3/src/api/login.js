@@ -57,3 +57,15 @@ export function getCodeImg() {
     timeout: 20000
   })
 }
+
+// 获取所有租户列表
+export function listAllTenant(params) {
+  return request({
+    url: '/tenantAll',
+    method: 'get',
+    params: params,
+    headers: {
+      isToken: false
+    },
+  })
+}

@@ -1,7 +1,7 @@
 # 开发环境配置
 app:
   prefix: ''
-  port: 8080
+  port: 9000
   logger:
     # 项目日志存储路径，相对路径（相对本项目根目录）或绝对路径
     dir: '../logs'
@@ -30,7 +30,7 @@ db:
   mysql:
     host: '127.0.0.1'
     username: 'root'
-    password: '123456'
+    password: 'root'
     database: 'fitness'
     port: 3306
     charset: 'utf8mb4'
@@ -66,6 +66,7 @@ perm:
         { path: '/logout', method: 'POST' },
         { path: '/perm/{id}', method: 'GET' },
         { path: '/upload', method: 'POST' },
+        { path: '/tenantAll', method: 'GET' }
       ]
 
 # 用户相关

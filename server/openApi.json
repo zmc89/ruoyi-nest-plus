@@ -2590,6 +2590,31 @@
         ]
       }
     },
+    "/tenantAll": {
+      "get": {
+        "operationId": "MainController_findAllTenant",
+        "summary": "全部租户列表",
+        "parameters": [
+          {
+            "name": "tenantName",
+            "required": false,
+            "in": "query",
+            "description": "租户名称",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "根目录"
+        ]
+      }
+    },
     "/captchaImage": {
       "get": {
         "operationId": "MainController_captchaImage",
@@ -2632,6 +2657,197 @@
         },
         "tags": [
           "根目录"
+        ]
+      }
+    },
+    "/system/tenant": {
+      "post": {
+        "operationId": "SysTenantController_create",
+        "summary": "租户管理-创建",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSysTenantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户管理"
+        ]
+      },
+      "put": {
+        "operationId": "SysTenantController_update",
+        "summary": "租户管理-修改",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSysTenantDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户管理"
+        ]
+      }
+    },
+    "/system/tenant/list": {
+      "get": {
+        "operationId": "SysTenantController_findAll",
+        "summary": "租户管理-列表",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "description": "当前分页",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "orderByColumn",
+            "required": false,
+            "in": "query",
+            "description": "排序字段",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isAsc",
+            "required": false,
+            "in": "query",
+            "description": "排序规则",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantCode",
+            "required": false,
+            "in": "query",
+            "description": "租户编码",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "tenantName",
+            "required": false,
+            "in": "query",
+            "description": "租户名称",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "租户状态",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantContact",
+            "required": false,
+            "in": "query",
+            "description": "联系人",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tenantPhone",
+            "required": false,
+            "in": "query",
+            "description": "联系电话",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户管理"
+        ]
+      }
+    },
+    "/system/tenant/{id}": {
+      "get": {
+        "operationId": "SysTenantController_findOne",
+        "summary": "租户管理-详情",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户管理"
+        ]
+      },
+      "delete": {
+        "operationId": "SysTenantController_remove",
+        "summary": "租户管理-删除",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户管理"
         ]
       }
     },
@@ -3223,197 +3439,6 @@
         },
         "tags": [
           "通用-文件上传"
-        ]
-      }
-    },
-    "/system/tenant": {
-      "post": {
-        "operationId": "SysTenantController_create",
-        "summary": "租户表-创建",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateSysTenantDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "租户表"
-        ]
-      },
-      "put": {
-        "operationId": "SysTenantController_update",
-        "summary": "租户表-修改",
-        "parameters": [],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateSysTenantDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "租户表"
-        ]
-      }
-    },
-    "/system/tenant/list": {
-      "get": {
-        "operationId": "SysTenantController_findAll",
-        "summary": "租户表-列表",
-        "parameters": [
-          {
-            "name": "pageNum",
-            "required": true,
-            "in": "query",
-            "description": "当前分页",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "pageSize",
-            "required": true,
-            "in": "query",
-            "description": "每页数量",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "orderByColumn",
-            "required": false,
-            "in": "query",
-            "description": "排序字段",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "isAsc",
-            "required": false,
-            "in": "query",
-            "description": "排序规则",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "tenantCode",
-            "required": false,
-            "in": "query",
-            "description": "租户编码",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "tenantName",
-            "required": false,
-            "in": "query",
-            "description": "租户名称",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "status",
-            "required": false,
-            "in": "query",
-            "description": "租户状态",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "tenantContact",
-            "required": false,
-            "in": "query",
-            "description": "联系人",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "tenantPhone",
-            "required": false,
-            "in": "query",
-            "description": "联系电话",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "租户表"
-        ]
-      }
-    },
-    "/system/tenant/{id}": {
-      "get": {
-        "operationId": "SysTenantController_findOne",
-        "summary": "租户表-详情",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "租户表"
-        ]
-      },
-      "delete": {
-        "operationId": "SysTenantController_remove",
-        "summary": "租户表-删除",
-        "parameters": [
-          {
-            "name": "id",
-            "required": true,
-            "in": "path",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "租户表"
         ]
       }
     }
@@ -4352,100 +4377,6 @@
           "uuid"
         ]
       },
-      "ListLoginlogDto": {
-        "type": "object",
-        "properties": {
-          "pageNum": {
-            "type": "number",
-            "description": "当前分页"
-          },
-          "pageSize": {
-            "type": "number",
-            "description": "每页数量"
-          },
-          "params": {
-            "description": "时间范围",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DateParamsDTO"
-              }
-            ]
-          },
-          "orderByColumn": {
-            "type": "string",
-            "description": "排序字段"
-          },
-          "isAsc": {
-            "type": "string",
-            "description": "排序规则"
-          },
-          "ipaddr": {
-            "type": "string"
-          },
-          "userName": {
-            "type": "string"
-          },
-          "status": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "pageNum",
-          "pageSize"
-        ]
-      },
-      "CreateOperlogDto": {
-        "type": "object",
-        "properties": {}
-      },
-      "UpdateOperlogDto": {
-        "type": "object",
-        "properties": {}
-      },
-      "OnlineListDto": {
-        "type": "object",
-        "properties": {
-          "pageNum": {
-            "type": "number"
-          },
-          "pageSize": {
-            "type": "number"
-          },
-          "ipaddr": {
-            "type": "string"
-          },
-          "userName": {
-            "type": "string"
-          }
-        }
-      },
-      "FileUploadDto": {
-        "type": "object",
-        "properties": {
-          "file": {
-            "type": "string",
-            "format": "binary"
-          }
-        },
-        "required": [
-          "file"
-        ]
-      },
-      "ChunkMergeFileDto": {
-        "type": "object",
-        "properties": {
-          "uploadId": {
-            "type": "string"
-          },
-          "fileName": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "uploadId",
-          "fileName"
-        ]
-      },
       "CreateSysTenantDto": {
         "type": "object",
         "properties": {
@@ -4599,6 +4530,100 @@
           "packageId",
           "areaCode",
           "tenantId"
+        ]
+      },
+      "ListLoginlogDto": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "number",
+            "description": "当前分页"
+          },
+          "pageSize": {
+            "type": "number",
+            "description": "每页数量"
+          },
+          "params": {
+            "description": "时间范围",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DateParamsDTO"
+              }
+            ]
+          },
+          "orderByColumn": {
+            "type": "string",
+            "description": "排序字段"
+          },
+          "isAsc": {
+            "type": "string",
+            "description": "排序规则"
+          },
+          "ipaddr": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "pageNum",
+          "pageSize"
+        ]
+      },
+      "CreateOperlogDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "UpdateOperlogDto": {
+        "type": "object",
+        "properties": {}
+      },
+      "OnlineListDto": {
+        "type": "object",
+        "properties": {
+          "pageNum": {
+            "type": "number"
+          },
+          "pageSize": {
+            "type": "number"
+          },
+          "ipaddr": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
+      },
+      "FileUploadDto": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary"
+          }
+        },
+        "required": [
+          "file"
+        ]
+      },
+      "ChunkMergeFileDto": {
+        "type": "object",
+        "properties": {
+          "uploadId": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "uploadId",
+          "fileName"
         ]
       }
     }

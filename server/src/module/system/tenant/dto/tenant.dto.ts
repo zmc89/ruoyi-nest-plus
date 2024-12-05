@@ -102,6 +102,13 @@ export class ListSysTenantDto extends PagingDto {
 	tenantPhone?: string;
 }
 
+export class AllListSysTenantDto {
+	@ApiProperty({required: false , description: '租户名称'})
+	@IsOptional()
+	@IsString()
+	tenantName?: string;
+}
+
 export class UpdateSysTenantDto extends CreateSysTenantDto {
 	@ApiProperty({required: true , description: '租户id'})
 	@IsNumber()

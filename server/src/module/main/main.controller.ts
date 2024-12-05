@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Request, Query } from "@nestjs/common";
 import { ApiTags, ApiOperation, ApiBody, ApiConsumes, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
 import * as Useragent from 'useragent';
 import { MainService } from './main.service';
@@ -9,6 +9,8 @@ import { GenerateUUID } from 'src/common/utils/index';
 import { RedisService } from 'src/module/redis/redis.service';
 import { CacheEnum } from 'src/common/enum/index';
 import { ConfigService } from 'src/module/system/config/config.service';
+import { SysTenantService } from "../system/tenant/tenant.service";
+import { AllListSysTenantDto } from "../system/tenant/dto/tenant.dto";
 
 @ApiTags('根目录')
 @Controller('/')
@@ -17,6 +19,8 @@ export class MainController {
     private readonly mainService: MainService,
     private readonly redisService: RedisService,
     private readonly configService: ConfigService,
+    private readonly sysTenantService: SysTenantService,
+
   ) {}
   @ApiOperation({
     summary: '用户登录',
@@ -78,6 +82,14 @@ export class MainController {
   @HttpCode(200)
   register(@Body() user: RegisterDto) {
     return this.mainService.register(user);
+  }
+
+  @ApiOperation({
+    summary: '全部租户列表',
+  })
+  @Get('tenantAll')
+  findAllTenant(@Query() query: AllListSysTenantDto) {
+    return this.sysTenantService.findAllTenant(query);
   }
 
   @ApiOperation({
