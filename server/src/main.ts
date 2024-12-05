@@ -10,6 +10,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { writeFileSync } from 'fs';
+declare const module: any;
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -72,6 +73,11 @@ async function bootstrap() {
   //服务端口
   const port = config.get<number>('app.port') || 8080;
   await app.listen(port);
+
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(() => app.close());
+  }
 
   console.log(
     `Nest-Admin 服务启动成功 `,

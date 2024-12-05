@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { ResultData } from 'src/common/utils/result';
-import { AllListSysTenantDto, CreateSysTenantDto, ListSysTenantDto, UpdateSysTenantDto } from "./dto/tenant.dto";
+import {CreateSysTenantDto, ListAllSysTenantDto, ListSysTenantDto, UpdateSysTenantDto} from './dto/tenant.dto';
 import { SysTenantEntity } from './entity/tenant.entity';
 
 @Injectable()
@@ -64,20 +64,6 @@ export class SysTenantService {
     });
   }
 
-  async findAllTenant(query:AllListSysTenantDto){
-    const entity = this.tenantEntityRep.createQueryBuilder('entity');
-    entity.where({ delFlag: '0' });
-    if(query.tenantName){
-      entity.andWhere('entity.tenantName LIKE :tenantName', { tenantName: `%${query.tenantName}%` });
-    }
-    entity.select([
-      'entity.tenantId',
-      'entity.tenantName'
-    ]);
-    const res = await entity.getMany();
-    return ResultData.ok(res);
-  }
-
   async findOne(id: number) {
     const res = await this.tenantEntityRep.findOne({
       where: {
@@ -101,5 +87,12 @@ export class SysTenantService {
       },
     );
     return ResultData.ok({ value: res.affected >= 1 });
+  }
+
+  async findAllTenant(query:ListAllSysTenantDto) {
+    const entity = this.tenantEntityRep.createQueryBuilder('entity');
+    entity.where({ delFlag: '0' });
+    entity.select(['entity.tenantName','entity.tenantCode']);
+    return ResultData.ok(await entity.getMany());
   }
 }

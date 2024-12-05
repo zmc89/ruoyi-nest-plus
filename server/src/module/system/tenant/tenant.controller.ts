@@ -3,7 +3,7 @@ import {Controller, Post, Body, Get, Param, Query, Put, Delete} from '@nestjs/co
 import {ApiTags, ApiOperation, ApiBody} from '@nestjs/swagger';
 import { RequirePermission } from 'src/common/decorators/require-premission.decorator';
 import {SysTenantService } from './tenant.service';
-import { AllListSysTenantDto, CreateSysTenantDto, ListSysTenantDto, UpdateSysTenantDto } from "./dto/tenant.dto";
+import {CreateSysTenantDto, ListAllSysTenantDto, ListSysTenantDto, UpdateSysTenantDto} from './dto/tenant.dto';
 
 
 @ApiTags('租户管理')

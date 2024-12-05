@@ -2590,31 +2590,6 @@
         ]
       }
     },
-    "/tenantAll": {
-      "get": {
-        "operationId": "MainController_findAllTenant",
-        "summary": "全部租户列表",
-        "parameters": [
-          {
-            "name": "tenantName",
-            "required": false,
-            "in": "query",
-            "description": "租户名称",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "根目录"
-        ]
-      }
-    },
     "/captchaImage": {
       "get": {
         "operationId": "MainController_captchaImage",
@@ -2650,6 +2625,31 @@
         "operationId": "MainController_getRouters",
         "summary": "路由信息",
         "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "根目录"
+        ]
+      }
+    },
+    "/getTenantList": {
+      "get": {
+        "operationId": "MainController_getTenantList",
+        "summary": "获取全部租户",
+        "parameters": [
+          {
+            "name": "tenantName",
+            "required": false,
+            "in": "query",
+            "description": "租户名称",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": ""
@@ -4336,6 +4336,9 @@
       "LoginDto": {
         "type": "object",
         "properties": {
+          "tenantCode": {
+            "type": "string"
+          },
           "code": {
             "type": "string"
           },
@@ -4358,6 +4361,9 @@
       "RegisterDto": {
         "type": "object",
         "properties": {
+          "tenantCode": {
+            "type": "string"
+          },
           "code": {
             "type": "string"
           },

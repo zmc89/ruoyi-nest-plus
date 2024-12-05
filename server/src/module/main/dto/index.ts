@@ -7,6 +7,14 @@ export enum StatusEnum {
 }
 
 export class LoginDto {
+
+  @ApiProperty({
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  tenantCode?: string;
+
   @ApiProperty({
     required: false,
   })

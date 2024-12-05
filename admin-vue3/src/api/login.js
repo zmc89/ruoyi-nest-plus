@@ -1,12 +1,13 @@
 import request from '@/utils/request'
 
 // 登录方法
-export function login(username, password, code, uuid) {
+export function login(username, password, code, uuid,tenantCode) {
   const data = {
     username,
     password,
     code,
-    uuid
+    uuid,
+    tenantCode
   }
   return request({
     url: '/login',
@@ -58,14 +59,16 @@ export function getCodeImg() {
   })
 }
 
-// 获取所有租户列表
-export function listAllTenant(params) {
+/**
+ * 获取全部租户
+ */
+export function getTenantList(query) {
   return request({
-    url: '/tenantAll',
-    method: 'get',
-    params: params,
+    url: '/getTenantList',
     headers: {
       isToken: false
     },
+    method: 'get',
+    params: query
   })
 }

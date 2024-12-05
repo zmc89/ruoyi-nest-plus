@@ -5,30 +5,19 @@
 
   <div class="login">
     <el-form ref="loginRef" :model="loginForm.model" :rules="loginForm.rules" class="login-form">
-      <h3 class="title">nest-admin后台管理系统</h3>
-      <el-form-item prop="tentanId">
-        <el-select
-          style="width: 100%"
-          size="large"
-          v-model="loginForm.model.tentanId"
-          multiple
-          filterable
-          remote
-          reserve-keyword
-          placeholder="请填写门店名称"
-          :remote-method="remoteMethod"
-          :loading="loading"
-        >
-          <el-option
-            v-for="item in tenantList"
-            :key="item.tenantId"
-            :label="item.tenantName"
-            :value="item.tenantId"
-          />
-        </el-select>
+      <h3 class="title">健康管理系统</h3>
+      <el-form-item prop="tenantId">
+        <el-input size="large" @input="querySearchName" v-model="loginForm.model.tenantName" maxlength="10" type="text"
+                  placeholder="请输入门店名称"  style="width: 100%">
+          <template #prefix>
+            <!-- <svg-icon icon-class="User" class="input-icon" /> -->
+            <Goods class="input-icon" />
+          </template>
+        </el-input>
       </el-form-item>
       <el-form-item prop="username">
-        <el-input v-model.trim="loginForm.model.username" maxlength="10" type="text" size="large" auto-complete="off" placeholder="账号">
+        <el-input v-model.trim="loginForm.model.username" maxlength="10" type="text" size="large" auto-complete="off"
+                  placeholder="账号">
           <template #prefix>
             <!-- <svg-icon icon-class="User" class="input-icon" /> -->
             <User class="input-icon" />
@@ -36,23 +25,27 @@
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginForm.model.password" maxlength="20" type="password" size="large" auto-complete="off" placeholder="密码" @keyup.enter="handleLogin">
+        <el-input v-model="loginForm.model.password" maxlength="20" type="password" size="large" auto-complete="off"
+                  placeholder="密码" @keyup.enter="handleLogin">
           <template #prefix>
             <Lock class="input-icon" />
           </template>
         </el-input>
       </el-form-item>
       <el-form-item prop="code" v-if="authCodeInfo.captchaEnabled">
-        <el-input v-model.trim="loginForm.model.code" maxlength="3" size="large" auto-complete="off" placeholder="验证码" style="width: 63%" @keyup.enter="handleLogin">
+        <el-input v-model.trim="loginForm.model.code" maxlength="3" size="large" auto-complete="off"
+                  placeholder="验证码" style="width: 63%" @keyup.enter="handleLogin">
           <template #prefix>
             <svg-icon icon-class="validCode" class="input-icon" />
           </template>
         </el-input>
-        <div class="login-code" v-html="authCodeInfo.imgUrl" @click="useAuthCode.getValidateCode(loginForm.model, true)" />
+        <div class="login-code" v-html="authCodeInfo.imgUrl"
+             @click="useAuthCode.getValidateCode(loginForm.model, true)" />
       </el-form-item>
       <el-checkbox v-model="loginForm.model.rememberMe" style="margin: 0px 0px 25px 0px">记住密码</el-checkbox>
       <el-form-item style="width: 100%">
-        <el-button :loading="authCodeInfo.loading" size="large" type="primary" style="width: 100%" @click.prevent="handleLogin">
+        <el-button :loading="authCodeInfo.loading" size="large" type="primary" style="width: 100%"
+                   @click.prevent="handleLogin">
           <span v-if="!authCodeInfo.loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
@@ -66,10 +59,12 @@
 </template>
 
 <script setup>
-import { listAllTenant } from '@/api/login'
+import { getTenantList } from '@/api/login'
 import useUserStore from '@/store/modules/user'
 import useAuthCode from '@/hooks/useAuthCode'
-import { onMounted } from 'vue'
+
+const { proxy } = getCurrentInstance();
+
 const userStore = useUserStore()
 const authCodeInfo = useAuthCode.authCodeInfo
 const route = useRoute()
@@ -80,13 +75,16 @@ const loading = ref(false)
 
 const loginForm = reactive({
   model: {
-    username: '',
-    password: '',
+    username: 'admin',
+    password: '123456',
+    tenantCode: '',
+    tenantName:'',
     rememberMe: false,
     code: '',
     uuid: ''
   },
   rules: {
+    tenantName:[{ required: true, trigger: 'blur', message: '请输入您的门店'}],
     username: [{ required: true, trigger: 'blur', message: '请输入您的账号' }],
     password: [{ required: true, trigger: 'blur', message: '请输入您的密码' }],
     code: [{ required: true, trigger: 'change', message: '请输入验证码' }]
@@ -106,55 +104,56 @@ watch(
 function handleLogin() {
   loginRef.value.validate((valid) => {
     if (valid) {
-      authCodeInfo.loading = true
-      loginForm.model.uuid = authCodeInfo.uuid
-      // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码，否则移除
-      useAuthCode.setUserCookie(loginForm.model)
+      if(loginForm.model.tenantCode){
+        authCodeInfo.loading = true
+        loginForm.model.uuid = authCodeInfo.uuid
+        // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码，否则移除
+        useAuthCode.setUserCookie(loginForm.model)
 
-      // 调用action的登录方法
-      userStore
-        .login(loginForm.model)
-        .then(() => {
-          router.push({ path: redirect.value || '/' })
-        })
-        .catch(() => {
-          authCodeInfo.loading = false
-          // 重新获取验证码
-          if (authCodeInfo.captchaEnabled) {
-            console.log(loginForm.model, '??')
-            useAuthCode.getValidateCode(loginForm.model, true)
-          }
-        })
+        // 调用action的登录方法
+        userStore
+          .login(loginForm.model)
+          .then(() => {
+            router.push({ path: redirect.value || '/' })
+          })
+          .catch(() => {
+            authCodeInfo.loading = false
+            // 重新获取验证码
+            if (authCodeInfo.captchaEnabled) {
+              console.log(loginForm.model, '??')
+              useAuthCode.getValidateCode(loginForm.model, true)
+            }
+          })
+      }else {
+        proxy.$modal.msgError('门店不存在！')
+      }
     }
   })
 }
 
-const remoteMethod = (query) => {
-  if (query) {
-    loading.value = true
-    setTimeout(() => {
-      loading.value = false
-     getAllTenant(query)
-    }, 200)
+const querySearchName = () => {
+  const item = tenantList.value.find(
+    (item) => item.tenantName == loginForm.model.tenantName
+  )
+  if(item){
+    loginForm.model.tenantCode = item.tenantCode
   }
 }
 
-const getAllTenant = (keyWord) => {
-  listAllTenant({
-    tenantName: keyWord
-  }).then(res => {
-    if (res.code === 0) {
-        this.tenantList = res.data
-    }
+// 获取全部租户
+const getAllTenant = (query) => {
+  getTenantList({
+    tenantName: query
+  }).then((res) => {
+    loading.value = false
+    tenantList.value = res?.data || []
   })
 }
 
+getAllTenant()
+
 useAuthCode.getValidateCode(loginForm.model, false)
 loginForm.model = useAuthCode.getUserCookie(loginForm.model)
-
-onMounted(() => {
-  getAllTenant()
-})
 </script>
 
 <style lang="scss" scoped>
@@ -167,6 +166,7 @@ onMounted(() => {
   height: 100%;
   background: #f0f2f5;
 }
+
 .title {
   margin: 0px auto 30px auto;
   text-align: center;
@@ -178,6 +178,7 @@ onMounted(() => {
   background: #ffffff;
   width: 400px;
   padding: 25px 25px 5px 25px;
+
   .input-icon {
     height: 39px;
     width: 14px;
@@ -190,11 +191,13 @@ onMounted(() => {
   height: 48px;
   float: right;
   text-align: right;
+
   img {
     cursor: pointer;
     vertical-align: middle;
   }
 }
+
 .el-login-footer {
   height: 40px;
   line-height: 40px;

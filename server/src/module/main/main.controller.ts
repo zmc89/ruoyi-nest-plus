@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Request, Query } from "@nestjs/common";
-import { ApiTags, ApiOperation, ApiBody, ApiConsumes, ApiQuery, ApiBearerAuth } from '@nestjs/swagger';
+import {Controller, Get, Post, Body, HttpCode, Request, Query} from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBody } from '@nestjs/swagger';
 import * as Useragent from 'useragent';
 import { MainService } from './main.service';
 import { RegisterDto, LoginDto } from './dto/index';
@@ -9,8 +9,7 @@ import { GenerateUUID } from 'src/common/utils/index';
 import { RedisService } from 'src/module/redis/redis.service';
 import { CacheEnum } from 'src/common/enum/index';
 import { ConfigService } from 'src/module/system/config/config.service';
-import { SysTenantService } from "../system/tenant/tenant.service";
-import { AllListSysTenantDto } from "../system/tenant/dto/tenant.dto";
+import {ListAllSysTenantDto} from "../system/tenant/dto/tenant.dto";
 
 @ApiTags('根目录')
 @Controller('/')
@@ -18,10 +17,9 @@ export class MainController {
   constructor(
     private readonly mainService: MainService,
     private readonly redisService: RedisService,
-    private readonly configService: ConfigService,
-    private readonly sysTenantService: SysTenantService,
-
+    private readonly configService: ConfigService
   ) {}
+
   @ApiOperation({
     summary: '用户登录',
   })
@@ -85,14 +83,6 @@ export class MainController {
   }
 
   @ApiOperation({
-    summary: '全部租户列表',
-  })
-  @Get('tenantAll')
-  findAllTenant(@Query() query: AllListSysTenantDto) {
-    return this.sysTenantService.findAllTenant(query);
-  }
-
-  @ApiOperation({
     summary: '获取验证图片',
   })
   @Get('/captchaImage')
@@ -140,5 +130,13 @@ export class MainController {
   getRouters(@Request() req) {
     const userId: string = req.user.user.userId;
     return this.mainService.getRouters(+userId);
+  }
+
+  @ApiOperation({
+    summary: '获取全部租户',
+  })
+  @Get('/getTenantList')
+  async getTenantList(@Query() query:ListAllSysTenantDto) {
+    return await this.mainService.getTenantList(query);
   }
 }
