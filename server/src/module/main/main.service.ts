@@ -7,11 +7,17 @@ import { AxiosService } from 'src/module/axios/axios.service';
 import { ListToTree } from 'src/common/utils/index';
 import { RegisterDto, LoginDto, ClientInfoDto } from './dto/index';
 import { MenuService } from '../system/menu/menu.service';
-import {ListAllSysTenantDto} from "../system/tenant/dto/tenant.dto";
-import { SysTenantService } from '../system/tenant/tenant.service';
+import {ListAllSysTenantDto} from "../system/tenant/tenant/dto/tenant.dto";
+import { SysTenantService } from '../system/tenant/tenant/tenant.service';
+import { SysTenantEntity } from "../system/tenant/tenant/entity/tenant.entity";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+
 @Injectable()
 export class MainService {
   constructor(
+    @InjectRepository(SysTenantEntity)
+    private readonly SysTenantRep: Repository<SysTenantEntity>,
     private readonly userService: UserService,
     private readonly loginlogService: LoginlogService,
     private readonly axiosService: AxiosService,
@@ -26,22 +32,38 @@ export class MainService {
    */
   async login(user: LoginDto, clientInfo: ClientInfoDto) {
     // 判断租户是否存在
-
-    // const loginLog = {
-    //   ...clientInfo,
-    //   userName: user.username,
-    //   status: '0',
-    //   msg: '',
-    // };
-    // try {
-    //   const loginLocation = await this.axiosService.getIpAddress(clientInfo.ipaddr);
-    //   loginLog.loginLocation = loginLocation;
-    // } catch (error) {}
-    // const loginRes = await this.userService.login(user, loginLog);
-    // loginLog.status = loginRes.code === SUCCESS_CODE ? '0' : '1';
-    // loginLog.msg = loginRes.msg;
-    // this.loginlogService.create(loginLog);
-    // return loginRes;
+    const tenant = await this.SysTenantRep.findOne({
+      where: {
+        delFlag: '0',
+        tenantCode: user.tenantCode
+      }
+    })
+    if (tenant){
+      // 如果租户存在则判断租户是否过期
+      const nowDate = new Date();
+      if (nowDate > new Date(tenant.expireTime)){
+        return ResultData.fail(500, '租户已过期,请联系管理员续费！');
+      }
+      const loginLog = {
+        ...clientInfo,
+        userName: user.username,
+        tenantName: tenant.tenantName,
+        tenantCode: tenant.tenantCode,
+        status: '0',
+        msg: '',
+      };
+      try {
+        const loginLocation = await this.axiosService.getIpAddress(clientInfo.ipaddr);
+        loginLog.loginLocation = loginLocation;
+      } catch (error) {}
+      const loginRes = await this.userService.login(user, loginLog);
+      loginLog.status = loginRes.code === SUCCESS_CODE ? '0' : '1';
+      loginLog.msg = loginRes.msg;
+      this.loginlogService.create(loginLog);
+      return loginRes;
+    }else {
+      return ResultData.fail(500, '租户不存在');
+    }
   }
   /**
    * 退出登陆

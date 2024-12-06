@@ -9,7 +9,7 @@ import { GenerateUUID } from 'src/common/utils/index';
 import { RedisService } from 'src/module/redis/redis.service';
 import { CacheEnum } from 'src/common/enum/index';
 import { ConfigService } from 'src/module/system/config/config.service';
-import {ListAllSysTenantDto} from "../system/tenant/dto/tenant.dto";
+import {ListAllSysTenantDto} from "../system/tenant/tenant/dto/tenant.dto";
 
 @ApiTags('根目录')
 @Controller('/')

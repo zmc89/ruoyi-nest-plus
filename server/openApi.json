@@ -3441,6 +3441,161 @@
           "通用-文件上传"
         ]
       }
+    },
+    "/system/tenant/package": {
+      "post": {
+        "operationId": "SysTenantPackageController_create",
+        "summary": "租户套餐-创建",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePackageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      },
+      "put": {
+        "operationId": "SysTenantPackageController_update",
+        "summary": "租户套餐-修改",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePackageDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      }
+    },
+    "/system/tenant/package/list": {
+      "get": {
+        "operationId": "SysTenantPackageController_findAll",
+        "summary": "租户套餐-列表",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "description": "当前分页",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "orderByColumn",
+            "required": false,
+            "in": "query",
+            "description": "排序字段",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isAsc",
+            "required": false,
+            "in": "query",
+            "description": "排序规则",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "packageName",
+            "required": false,
+            "in": "query",
+            "description": "套餐名称",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      }
+    },
+    "/system/tenant/package/{id}": {
+      "get": {
+        "operationId": "SysTenantPackageController_findOne",
+        "summary": "租户套餐-详情",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      },
+      "delete": {
+        "operationId": "SysTenantPackageController_remove",
+        "summary": "租户套餐-删除",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      }
     }
   },
   "info": {
@@ -4631,6 +4786,44 @@
           "uploadId",
           "fileName"
         ]
+      },
+      "CreatePackageDto": {
+        "type": "object",
+        "properties": {
+          "packageName": {
+            "type": "string",
+            "description": "套餐名称"
+          },
+          "menuIds": {
+            "type": "string",
+            "description": "关联菜单id"
+          },
+          "menuCheckStrictly": {
+            "type": "number",
+            "description": "菜单树选择项是否关联显示"
+          }
+        }
+      },
+      "UpdatePackageDto": {
+        "type": "object",
+        "properties": {
+          "packageName": {
+            "type": "string",
+            "description": "套餐名称"
+          },
+          "menuIds": {
+            "type": "string",
+            "description": "关联菜单id"
+          },
+          "menuCheckStrictly": {
+            "type": "number",
+            "description": "菜单树选择项是否关联显示"
+          },
+          "packageId": {
+            "type": "number",
+            "description": "套餐id"
+          }
+        }
       }
     }
   }

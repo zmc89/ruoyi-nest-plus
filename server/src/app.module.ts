@@ -28,7 +28,8 @@ import { AxiosModule } from './module/axios/axios.module';
 import { OnlineModule } from './module/monitor/online/online.module';
 import { ServerModule } from './module/monitor/server/server.module';
 import { UploadModule } from './module/upload/upload.module';
-import {SysTenantModule } from "./module/system/tenant/tenant.module";
+import { SysTenantModule } from "./module/system/tenant/tenant/tenant.module";
+import { SysTenantPackageModule } from "./module/system/tenant/package/package.module";
 
 @Global()
 @Module({
@@ -89,7 +90,8 @@ import {SysTenantModule } from "./module/system/tenant/tenant.module";
     OnlineModule,
     ServerModule,
     UploadModule,
-    SysTenantModule
+    SysTenantModule,
+    SysTenantPackageModule
   ],
   providers: [
     {

@@ -343,7 +343,7 @@ export class UserService {
     );
 
     const uuid = GenerateUUID();
-    const token = this.createToken({ uuid: uuid, userId: userData.userId });
+    const token = this.createToken({ uuid: uuid, userId: userData.userId,tenantCode: userData.tenantCode });
     const permissions = await this.getUserPermissions(userData.userId);
     const deptData = await this.sysDeptEntityRep.findOne({
       where: {
@@ -479,7 +479,7 @@ export class UserService {
    * @param payload 数据声明
    * @return 令牌
    */
-  createToken(payload: { uuid: string; userId: number }): string {
+  createToken(payload: { uuid: string; userId: number,tenantCode:string }): string {
     const accessToken = this.jwtService.sign(payload);
     return accessToken;
   }

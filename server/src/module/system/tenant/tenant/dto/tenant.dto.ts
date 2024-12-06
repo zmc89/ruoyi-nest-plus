@@ -1,7 +1,7 @@
 
 import {IsString, IsNumber, IsDate, IsOptional, Length, IsEnum} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { PagingDto } from 'src/common/dto/index';
+import { PagingDto } from 'src/common/dto';
 
 export enum StatusEnum {
 	STATIC = '0',
