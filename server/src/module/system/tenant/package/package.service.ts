@@ -23,7 +23,7 @@ constructor(
 	if(query.packageName){
           entity.andWhere("entity.packageName LIKE :packageName", {packageName: `%${query.packageName}%`});
         }
-        entity.select(["entity.packageId","entity.packageName","entity.menuIds","entity.menuCheckStrictly"])
+        entity.select(["entity.packageId","entity.packageName","entity.menuIds","entity.menuCheckStrictly","entity.createTime"])
         if (query.orderByColumn && query.isAsc) {
           const key = query.isAsc === 'ascending' ? 'ASC' : 'DESC';
           entity.orderBy(`entity.${query.orderByColumn}`, key);

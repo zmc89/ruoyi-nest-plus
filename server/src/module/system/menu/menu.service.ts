@@ -8,6 +8,7 @@ import { CreateMenuDto, UpdateMenuDto, ListDeptDto } from './dto/index';
 import { ListToTree, Uniq } from 'src/common/utils/index';
 import { UserService } from '../user/user.service';
 import { buildMenus } from './utils';
+import {SysTenantPackageEntity} from "../tenant/package/entity/tenant.package.entity";
 @Injectable()
 export class MenuService {
   constructor(
@@ -17,6 +18,8 @@ export class MenuService {
     private readonly sysMenuEntityRep: Repository<SysMenuEntity>,
     @InjectRepository(SysRoleWithMenuEntity)
     private readonly sysRoleWithMenuEntityRep: Repository<SysRoleWithMenuEntity>,
+    @InjectRepository(SysTenantPackageEntity)
+    private readonly sysTenantPackageEntityRep: Repository<SysTenantPackageEntity>,
   ) {}
 
   async create(createMenuDto: CreateMenuDto) {
@@ -78,6 +81,33 @@ export class MenuService {
     const checkedKeys = menuIds.map((item) => {
       return item.menuId;
     });
+    return ResultData.ok({
+      menus: tree,
+      checkedKeys: checkedKeys,
+    });
+  }
+
+  async packageMenuTreeselect(packageId: number): Promise<any> {
+    const res = await this.sysMenuEntityRep.find({
+      where: {
+        delFlag: '0',
+      },
+      order: {
+        orderNum: 'ASC',
+      },
+    });
+    const tree = ListToTree(
+        res,
+        (m) => m.menuId,
+        (m) => m.menuName,
+    );
+    const menuIdsResult = await this.sysTenantPackageEntityRep.findOne({
+      where: { packageId: packageId },
+      select: ['menuIds'],
+    });
+    console.log(menuIdsResult);
+    const menuIds = JSON.parse(menuIdsResult.menuIds)
+    const checkedKeys = menuIds
     return ResultData.ok({
       menus: tree,
       checkedKeys: checkedKeys,

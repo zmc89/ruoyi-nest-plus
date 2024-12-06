@@ -145,10 +145,31 @@
     />
 
     <!-- 添加或修改岗位对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="tenantRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="租户编码" prop="tenantCode">
-          <el-input v-model="form.postName" placeholder="请输入岗位名称" />
+    <el-dialog :title="title" v-model="open" width="600px" append-to-body>
+      <el-form ref="tenantRef" :model="form" :rules="rules" label-width="120px">
+        <el-form-item label="租户logo" prop="tenantLogo">
+          <image-uploader v-model="form.tenantLogo" :limit="1"></image-uploader>
+        </el-form-item>
+        <el-form-item label="租户名称" prop="tenantName">
+          <el-input v-model="form.tenantName" placeholder="请输入租户名称" />
+        </el-form-item>
+        <el-form-item label="租户联系人" prop="tenantContact">
+          <el-input v-model="form.tenantContact" placeholder="请输入租户联系人" />
+        </el-form-item>
+        <el-form-item label="租户联系电话" prop="tenantPhone">
+          <el-input v-model="form.tenantPhone" placeholder="请输入租户联系电话" />
+        </el-form-item>
+        <el-form-item label="租户名称" prop="tenantName">
+          <el-input v-model="form.postName" placeholder="请选择租户套餐" />
+        </el-form-item>
+        <el-form-item label="租户名称" prop="tenantName">
+          <el-input v-model="form.postName" placeholder="请输入租户名称" />
+        </el-form-item>
+        <el-form-item label="租户名称" prop="tenantName">
+          <el-input v-model="form.postName" placeholder="请输入租户名称" />
+        </el-form-item>
+        <el-form-item label="租户名称" prop="tenantName">
+          <el-input v-model="form.postName" placeholder="请输入租户名称" />
         </el-form-item>
         <el-form-item label="岗位编码" prop="postCode">
           <el-input v-model="form.postCode" placeholder="请输入编码名称" />

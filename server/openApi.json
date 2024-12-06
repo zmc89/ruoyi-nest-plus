@@ -1409,6 +1409,30 @@
         ]
       }
     },
+    "/system/menu/packageMenuTreeselect/{packageId}": {
+      "get": {
+        "operationId": "MenuController_packageMenuTreeselect",
+        "summary": "菜单管理-租户套餐-树表",
+        "parameters": [
+          {
+            "name": "packageId",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "菜单管理"
+        ]
+      }
+    },
     "/system/menu/{menuId}": {
       "get": {
         "operationId": "MenuController_findOne",

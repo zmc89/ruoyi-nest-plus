@@ -50,6 +50,15 @@ export class MenuController {
   }
 
   @ApiOperation({
+    summary: '菜单管理-租户套餐-树表',
+  })
+  @RequirePermission('system:menu:query')
+  @Get('/packageMenuTreeselect/:packageId')
+  packageMenuTreeselect(@Param('packageId') packageId: string) {
+    return this.menuService.packageMenuTreeselect(+packageId);
+  }
+
+  @ApiOperation({
     summary: '菜单管理-详情',
   })
   @RequirePermission('system:menu:query')

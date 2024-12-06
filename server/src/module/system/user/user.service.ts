@@ -343,6 +343,7 @@ export class UserService {
     );
 
     const uuid = GenerateUUID();
+    console.log('uuid', userData);
     const token = this.createToken({ uuid: uuid, userId: userData.userId,tenantCode: userData.tenantCode });
     const permissions = await this.getUserPermissions(userData.userId);
     const deptData = await this.sysDeptEntityRep.findOne({
