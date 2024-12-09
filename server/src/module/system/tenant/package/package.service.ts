@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository ,Not ,In,Like} from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { ResultData } from 'src/common/utils/result';
-import { CreatePackageDto, UpdatePackageDto, QueryPackageDto } from './dto/package.dto';
+import {CreatePackageDto, UpdatePackageDto, QueryPackageDto, updatePackageStatusDto} from './dto/package.dto';
 import { SysTenantPackageEntity } from './entity/tenant.package.entity';
 
 @Injectable()
@@ -23,7 +23,7 @@ constructor(
 	if(query.packageName){
           entity.andWhere("entity.packageName LIKE :packageName", {packageName: `%${query.packageName}%`});
         }
-        entity.select(["entity.packageId","entity.packageName","entity.menuIds","entity.menuCheckStrictly","entity.createTime"])
+        entity.select(["entity.packageId","entity.packageName","entity.menuIds","entity.menuCheckStrictly","entity.status","entity.createTime"])
         if (query.orderByColumn && query.isAsc) {
           const key = query.isAsc === 'ascending' ? 'ASC' : 'DESC';
           entity.orderBy(`entity.${query.orderByColumn}`, key);
@@ -60,5 +60,15 @@ constructor(
             },
         );
         return ResultData.ok({value:res.affected >= 1});
+    }
+
+    async changePackageStatus(updatePackageStatusDto: updatePackageStatusDto){
+       const res = await this.packageEntityRep.update(
+            { packageId: updatePackageStatusDto.packageId },
+            {
+                status: updatePackageStatusDto.status,
+            },
+        );
+       return ResultData.ok();
     }
 }

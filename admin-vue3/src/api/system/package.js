@@ -49,3 +49,11 @@
     })
     }
 
+    export function changePackageStatus(data){
+    return request({
+        url: '/system/tenant/package/changePackageStatus',
+        method: 'put',
+        data: data
+    })
+    }
+

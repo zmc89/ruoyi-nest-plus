@@ -35,3 +35,13 @@ export class QueryPackageDto extends PagingDto {
 	packageName?: string;
 }
 
+export class updatePackageStatusDto {
+	@ApiProperty({required: true , description: '套餐id'})
+	@IsNumber()
+	packageId: number;
+
+	@ApiProperty({required: true , description: '状态'})
+	@IsString()
+	status: string;
+}
+

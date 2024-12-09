@@ -105,7 +105,6 @@ export class MenuService {
       where: { packageId: packageId },
       select: ['menuIds'],
     });
-    console.log(menuIdsResult);
     const menuIds = JSON.parse(menuIdsResult.menuIds)
     const checkedKeys = menuIds
     return ResultData.ok({

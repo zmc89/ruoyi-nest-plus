@@ -3,7 +3,7 @@ import { Controller, Get, Post, Put, Body, Query, Param, Delete } from '@nestjs/
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { RequirePermission } from 'src/common/decorators/require-premission.decorator';
 import { SysTenantPackageService } from './package.service';
-import { CreatePackageDto,UpdatePackageDto, QueryPackageDto } from './dto/package.dto';
+import {CreatePackageDto, UpdatePackageDto, QueryPackageDto, updatePackageStatusDto} from './dto/package.dto';
 
 @ApiTags('租户套餐')
 @Controller('system/tenant/package')
@@ -53,4 +53,13 @@ constructor(private readonly  tenantPackageService: SysTenantPackageService) {}
     remove(@Param('id') id: string) {
         return this.tenantPackageService.remove(+id);
     }
+    @ApiOperation({
+        summary: '租户套餐-更改状态',
+    })
+    @RequirePermission('system:tenantPackage:edit')
+    @Put('changePackageStatus')
+    async changePackageStatus(@Body() body:updatePackageStatusDto) {
+        return await this.tenantPackageService.changePackageStatus(body);
+    }
+
 }

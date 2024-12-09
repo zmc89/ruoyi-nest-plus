@@ -148,7 +148,7 @@
     <el-dialog :title="title" v-model="open" width="600px" append-to-body>
       <el-form ref="tenantRef" :model="form" :rules="rules" label-width="120px">
         <el-form-item label="租户logo" prop="tenantLogo">
-          <image-uploader v-model="form.tenantLogo" :limit="1"></image-uploader>
+          <image-upload v-model="form.tenantLogo" :limit="1"></image-upload>
         </el-form-item>
         <el-form-item label="租户名称" prop="tenantName">
           <el-input v-model="form.tenantName" placeholder="请输入租户名称" />

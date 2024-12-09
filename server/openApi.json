@@ -3620,6 +3620,31 @@
           "租户套餐"
         ]
       }
+    },
+    "/system/tenant/package/changePackageStatus": {
+      "put": {
+        "operationId": "SysTenantPackageController_changePackageStatus",
+        "summary": "租户套餐-更改状态",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updatePackageStatusDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "租户套餐"
+        ]
+      }
     }
   },
   "info": {
@@ -4848,6 +4873,23 @@
             "description": "套餐id"
           }
         }
+      },
+      "updatePackageStatusDto": {
+        "type": "object",
+        "properties": {
+          "packageId": {
+            "type": "number",
+            "description": "套餐id"
+          },
+          "status": {
+            "type": "string",
+            "description": "状态"
+          }
+        },
+        "required": [
+          "packageId",
+          "status"
+        ]
       }
     }
   }
