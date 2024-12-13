@@ -3,18 +3,16 @@ import { Controller, Get, Post, Put, Body, Query, Param, Delete } from '@nestjs/
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { RequirePermission } from 'src/common/decorators/require-premission.decorator';
 import { DoctorService } from './doctor.service';
-import { CreateDoctorDto, BaseDoctorDto, UpdateDoctorDto, QueryDoctorDto, ListDoctorDto } from './dto/doctor.dto';
-import { ApiDataResponse } from 'src/common/decorators/apiDataResponse.decorator';
+import { CreateDoctorDto, UpdateDoctorDto, QueryDoctorDto } from './dto/index';
 
 @ApiTags('医生表')
-@Controller('system/doctor')
+@Controller('hospital/doctor')
 export class DoctorController {
     constructor(private readonly doctorService: DoctorService) {}
     @ApiOperation({
         summary: '医生表-创建',
     })
-    @ApiDataResponse(BaseDoctorDto)
-    @RequirePermission('system:doctor:add')
+    @RequirePermission('hospital:doctor:add')
     @Post()
     create(@Body() body: CreateDoctorDto) {
         return this.doctorService.create(body);
@@ -23,8 +21,7 @@ export class DoctorController {
     @ApiOperation({
         summary: '医生表-列表',
     })
-    @ApiDataResponse(ListDoctorDto, true, true)
-    @RequirePermission('system:doctor:list')
+    @RequirePermission('hospital:doctor:list')
     @Get('list')
     findAll(@Query() query: QueryDoctorDto) {
         return this.doctorService.findAll(query);
@@ -33,8 +30,7 @@ export class DoctorController {
     @ApiOperation({
         summary: '医生表-详情',
     })
-    @ApiDataResponse(BaseDoctorDto)
-    @RequirePermission('system:doctor:query')
+    @RequirePermission('hospital:doctor:query')
     @Get(':id')
     findOne(@Param('id') id: string) {
         return this.doctorService.findOne(+id);
@@ -43,8 +39,7 @@ export class DoctorController {
     @ApiOperation({
         summary: '医生表-修改',
     })
-    @ApiDataResponse()
-    @RequirePermission('system:doctor:edit')
+    @RequirePermission('hospital:doctor:edit')
     @Put()
     update(@Body() body: UpdateDoctorDto) {
         return this.doctorService.update(body);
@@ -53,8 +48,7 @@ export class DoctorController {
     @ApiOperation({
         summary: '医生表-删除',
     })
-    @ApiDataResponse()
-    @RequirePermission('system:doctor:remove')
+    @RequirePermission('hospital:doctor:remove')
     @Delete(':id')
     remove(@Param('id') id: string) {
         return this.doctorService.remove(+id);

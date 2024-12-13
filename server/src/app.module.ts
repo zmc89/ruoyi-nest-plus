@@ -30,6 +30,7 @@ import { ServerModule } from './module/monitor/server/server.module';
 import { UploadModule } from './module/upload/upload.module';
 import { SysTenantModule } from "./module/system/tenant/tenant/tenant.module";
 import { SysTenantPackageModule } from "./module/system/tenant/package/package.module";
+import { DoctorModule } from "./module/hospital/doctor/doctor.module"
 
 @Global()
 @Module({
@@ -91,7 +92,8 @@ import { SysTenantPackageModule } from "./module/system/tenant/package/package.m
     ServerModule,
     UploadModule,
     SysTenantModule,
-    SysTenantPackageModule
+    SysTenantPackageModule,
+    DoctorModule
   ],
   providers: [
     {

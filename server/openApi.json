@@ -3645,6 +3645,188 @@
           "租户套餐"
         ]
       }
+    },
+    "/hospital/doctor": {
+      "post": {
+        "operationId": "DoctorController_create",
+        "summary": "医生表-创建",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDoctorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医生表"
+        ]
+      },
+      "put": {
+        "operationId": "DoctorController_update",
+        "summary": "医生表-修改",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDoctorDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医生表"
+        ]
+      }
+    },
+    "/hospital/doctor/list": {
+      "get": {
+        "operationId": "DoctorController_findAll",
+        "summary": "医生表-列表",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "description": "当前分页",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "orderByColumn",
+            "required": false,
+            "in": "query",
+            "description": "排序字段",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isAsc",
+            "required": false,
+            "in": "query",
+            "description": "排序规则",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorName",
+            "required": false,
+            "in": "query",
+            "description": "医生姓名",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorPostId",
+            "required": false,
+            "in": "query",
+            "description": "医生职称",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "doctorDeptId",
+            "required": false,
+            "in": "query",
+            "description": "医生科室",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "医生状态",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医生表"
+        ]
+      }
+    },
+    "/hospital/doctor/{id}": {
+      "get": {
+        "operationId": "DoctorController_findOne",
+        "summary": "医生表-详情",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医生表"
+        ]
+      },
+      "delete": {
+        "operationId": "DoctorController_remove",
+        "summary": "医生表-删除",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医生表"
+        ]
+      }
     }
   },
   "info": {
@@ -4889,6 +5071,95 @@
         "required": [
           "packageId",
           "status"
+        ]
+      },
+      "CreateDoctorDto": {
+        "type": "object",
+        "properties": {
+          "doctorName": {
+            "type": "string",
+            "description": "医生姓名"
+          },
+          "doctorAvatar": {
+            "type": "string",
+            "description": "医生头像"
+          },
+          "doctorTitle": {
+            "type": "string",
+            "description": "医生职称"
+          },
+          "doctorIntro": {
+            "type": "string",
+            "description": "医生简介"
+          },
+          "doctorGoodAt": {
+            "type": "string",
+            "description": "医生擅长"
+          },
+          "isRecommend": {
+            "type": "number",
+            "description": "是否推荐"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "医院ID",
+            "default": "000000"
+          }
+        },
+        "required": [
+          "doctorName",
+          "doctorAvatar",
+          "doctorTitle",
+          "doctorIntro",
+          "doctorGoodAt",
+          "tenantCode"
+        ]
+      },
+      "UpdateDoctorDto": {
+        "type": "object",
+        "properties": {
+          "doctorName": {
+            "type": "string",
+            "description": "医生姓名"
+          },
+          "doctorAvatar": {
+            "type": "string",
+            "description": "医生头像"
+          },
+          "doctorTitle": {
+            "type": "string",
+            "description": "医生职称"
+          },
+          "doctorIntro": {
+            "type": "string",
+            "description": "医生简介"
+          },
+          "doctorGoodAt": {
+            "type": "string",
+            "description": "医生擅长"
+          },
+          "isRecommend": {
+            "type": "number",
+            "description": "是否推荐"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "医院ID",
+            "default": "000000"
+          },
+          "doctorId": {
+            "type": "number",
+            "description": "医生ID"
+          }
+        },
+        "required": [
+          "doctorName",
+          "doctorAvatar",
+          "doctorTitle",
+          "doctorIntro",
+          "doctorGoodAt",
+          "tenantCode",
+          "doctorId"
         ]
       }
     }

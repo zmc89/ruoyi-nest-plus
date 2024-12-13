@@ -42,5 +42,23 @@ export class UpdateDoctorDto extends CreateDoctorDto {
     doctorId: number;
 }
 
-export class QueryDoctorDto extends {}
-export class ListDoctorDto  extends PagingDto {}
+export class QueryDoctorDto  extends PagingDto {
+    @ApiProperty({required: false , description: '医生姓名'})
+    @IsOptional()
+    @IsString()
+    doctorName?: string;
+
+    @ApiProperty({required: false , description: '医生职称'})
+    @IsOptional()
+    @IsString()
+    doctorPostId?: string;
+
+    @ApiProperty({required: false , description: '医生科室'})
+    @IsOptional()
+    @IsString()
+    doctorDeptId?: string;
+
+    @ApiProperty({required: false , description: '医生状态'})
+    @IsOptional()
+    status?: string;
+}
