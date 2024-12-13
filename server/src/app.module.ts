@@ -28,9 +28,10 @@ import { AxiosModule } from './module/axios/axios.module';
 import { OnlineModule } from './module/monitor/online/online.module';
 import { ServerModule } from './module/monitor/server/server.module';
 import { UploadModule } from './module/upload/upload.module';
-import { SysTenantModule } from "./module/system/tenant/tenant/tenant.module";
-import { SysTenantPackageModule } from "./module/system/tenant/package/package.module";
-import { DoctorModule } from "./module/hospital/doctor/doctor.module"
+import { SysTenantModule } from './module/system/tenant/tenant/tenant.module';
+import { SysTenantPackageModule } from './module/system/tenant/package/package.module';
+import { DoctorModule } from './module/hospital/doctor/doctor.module'
+import { DepartmentsModule } from './module/hospital/departments/departments.module'
 
 @Global()
 @Module({
@@ -93,7 +94,8 @@ import { DoctorModule } from "./module/hospital/doctor/doctor.module"
     UploadModule,
     SysTenantModule,
     SysTenantPackageModule,
-    DoctorModule
+    DoctorModule,
+    DepartmentsModule
   ],
   providers: [
     {

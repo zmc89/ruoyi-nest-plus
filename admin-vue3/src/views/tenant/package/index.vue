@@ -1,7 +1,6 @@
 <template>
   <div class="p-2">
     <div v-show="showSearch" class="mb-[10px]">
-      <el-card shadow="hover">
         <el-form ref="queryFormRef" :model="queryParams" :inline="true">
           <el-form-item label="套餐名称" prop="packageName">
             <el-input v-model="queryParams.packageName" placeholder="请输入套餐名称" clearable
@@ -12,11 +11,7 @@
             <el-button icon="Refresh" @click="resetQuery">重置</el-button>
           </el-form-item>
         </el-form>
-      </el-card>
     </div>
-
-    <el-card shadow="hover">
-      <template #header>
         <el-row :gutter="10" class="mb8">
           <el-col :span="1.5">
             <el-button v-hasPermi="['system:tenantPackage:add']" type="primary" plain icon="Plus" @click="handleAdd">
@@ -37,7 +32,6 @@
           </el-col>
           <right-toolbar v-model:showSearch="showSearch" @query-table="getList"></right-toolbar>
         </el-row>
-      </template>
 
       <el-table v-loading="loading" :data="tenantPackageList" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" align="center" />
@@ -68,8 +62,6 @@
 
       <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
                   :total="total" @pagination="getList" />
-    </el-card>
-
     <!-- 添加或修改租户套餐对话框 -->
     <el-dialog v-model="dialog.visible" :title="dialog.title" width="500px" append-to-body>
       <el-form ref="tenantPackageFormRef" :model="form" :rules="rules" label-width="80px">

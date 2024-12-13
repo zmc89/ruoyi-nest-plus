@@ -3827,6 +3827,206 @@
           "医生表"
         ]
       }
+    },
+    "/hospital/departments": {
+      "post": {
+        "operationId": "DepartmentsController_create",
+        "summary": "医院科室表-创建",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateDepartmentsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      },
+      "put": {
+        "operationId": "DepartmentsController_update",
+        "summary": "医院科室表-修改",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepartmentsDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ResultData"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean",
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      }
+    },
+    "/hospital/departments/list": {
+      "get": {
+        "operationId": "DepartmentsController_findAll",
+        "summary": "医院科室表-列表",
+        "parameters": [
+          {
+            "name": "deptName",
+            "required": false,
+            "in": "query",
+            "description": "科室名称",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "required": false,
+            "in": "query",
+            "description": "状态",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      }
+    },
+    "/hospital/departments/list/exclude/{id}": {
+      "get": {
+        "operationId": "DepartmentsController_findListExclude",
+        "summary": "部门管理-黑名单",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      }
+    },
+    "/hospital/departments/{id}": {
+      "get": {
+        "operationId": "DepartmentsController_findOne",
+        "summary": "医院科室表-详情",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      },
+      "delete": {
+        "operationId": "DepartmentsController_remove",
+        "summary": "医院科室表-删除",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ResultData"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean",
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      }
     }
   },
   "info": {
@@ -5160,6 +5360,94 @@
           "doctorGoodAt",
           "tenantCode",
           "doctorId"
+        ]
+      },
+      "CreateDepartmentsDto": {
+        "type": "object",
+        "properties": {
+          "deptName": {
+            "type": "string",
+            "description": "科室名称"
+          },
+          "parentId": {
+            "type": "number",
+            "description": "父级科室"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "所属医院"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序"
+          },
+          "leader": {
+            "type": "string",
+            "description": "科室负责人"
+          },
+          "phone": {
+            "type": "string",
+            "description": "负责人电话"
+          }
+        },
+        "required": [
+          "deptName",
+          "sort"
+        ]
+      },
+      "ResultData": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "number",
+            "default": 200
+          },
+          "msg": {
+            "type": "string",
+            "default": "操作成功"
+          }
+        },
+        "required": [
+          "code",
+          "msg"
+        ]
+      },
+      "UpdateDepartmentsDto": {
+        "type": "object",
+        "properties": {
+          "deptName": {
+            "type": "string",
+            "description": "科室名称"
+          },
+          "parentId": {
+            "type": "number",
+            "description": "父级科室"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "所属医院"
+          },
+          "sort": {
+            "type": "number",
+            "description": "排序"
+          },
+          "leader": {
+            "type": "string",
+            "description": "科室负责人"
+          },
+          "phone": {
+            "type": "string",
+            "description": "负责人电话"
+          },
+          "hospitalDeptId": {
+            "type": "number",
+            "description": "科室ID"
+          }
+        },
+        "required": [
+          "deptName",
+          "sort",
+          "hospitalDeptId"
         ]
       }
     }
