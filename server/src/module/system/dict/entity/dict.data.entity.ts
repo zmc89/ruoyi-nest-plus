@@ -11,7 +11,7 @@ export class SysDictDataEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ type: 'int', name: 'dict_code', comment: '字典主键' })
   public dictCode: number;
 
-  @Column({ type: 'varchar', name: 'tenant_code',  comment: '租户编码' })
+  @Column({ type: 'varchar', name: 'tenant_code',  comment: '租户编码',default: '000000' })
   public tenantCode: string;
 
   @Column({ type: 'int', name: 'dict_sort', default: 0, comment: '字典排序' })

@@ -92,6 +92,9 @@ export class SysTenantService {
   async findAllTenant(query:ListAllSysTenantDto) {
     const entity = this.tenantEntityRep.createQueryBuilder('entity');
     entity.where({ delFlag: '0' });
+    if(query.tenantName){
+      entity.andWhere('entity.tenantName LIKE :tenantName',{tenantName:`%${query.tenantName}%`})
+    }
     entity.select(['entity.tenantName','entity.tenantCode']);
     return ResultData.ok(await entity.getMany());
   }
