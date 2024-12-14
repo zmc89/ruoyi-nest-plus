@@ -27,12 +27,12 @@ export class DoctorService {
             entity.andWhere("entity.doctorName LIKE :doctorName", {doctorName: `%${query.doctorName}%`});
         }
         if(query.doctorPostId){
-            entity.andWhere("entity.doctorPostId = :doctorPostId", {doctorTitle: query.doctorPostId});
+            entity.andWhere("entity.doctorPostId = :doctorPostId", {doctorPostId: query.doctorPostId});
         }
         if(query.doctorDeptId){
             entity.andWhere("entity.doctorDeptId = :doctorDeptId", {doctorDeptId: query.doctorDeptId});
         }
-        entity.select(["entity.doctorId","entity.status","entity.remark","entity.doctorName","entity.doctorAvatar","entity.doctorTitle","entity.doctorIntro","entity.doctorGoodAt","entity.isRecommend","entity.tenantCode"])
+        entity.select(["entity.doctorId","entity.status","entity.remark","entity.doctorName","entity.doctorAvatar","entity.doctorIntro","entity.doctorGoodAt","entity.isRecommend","entity.tenantCode"])
         if (query.orderByColumn && query.isAsc) {
             const key = query.isAsc === 'ascending' ? 'ASC' : 'DESC';
             entity.orderBy(`entity.${query.orderByColumn}`, key);

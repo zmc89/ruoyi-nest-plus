@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询医生表列表
 export function listDoctor(query) {
   return request({
-    url: '/system/doctor/list',
+    url: '/hospital/doctor/list',
     method: 'get',
     params: query
   })
@@ -11,7 +11,7 @@ export function listDoctor(query) {
 // 查询医生表详细
 export function getDoctor(doctorId) {
   return request({
-    url: '/system/doctor/' + doctorId,
+    url: '/hospital/doctor/' + doctorId,
     method: 'get'
   })
 }
@@ -19,7 +19,7 @@ export function getDoctor(doctorId) {
 // 新增医生表
 export function addDoctor(data) {
   return request({
-    url: '/system/doctor',
+    url: '/hospital/doctor',
     method: 'post',
     data: data
   })
@@ -28,7 +28,7 @@ export function addDoctor(data) {
 // 修改医生表
 export function updateDoctor(data) {
   return request({
-    url: '/system/doctor',
+    url: '/hospital/doctor',
     method: 'put',
     data: data
   })
@@ -37,7 +37,7 @@ export function updateDoctor(data) {
 // 删除医生表
 export function delDoctor(doctorId) {
   return request({
-    url: '/system/doctor/' + doctorId,
+    url: '/hospital/doctor/' + doctorId,
     method: 'delete'
   })
 }

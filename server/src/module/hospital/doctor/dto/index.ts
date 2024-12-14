@@ -16,7 +16,7 @@ export class CreateDoctorDto{
 
     @ApiProperty({required: true , description: '医生职称'})
     @IsString()
-    doctorTitle: string;
+    doctorPostId: number;
 
     @ApiProperty({required: true , description: '医生简介'})
     @IsString()

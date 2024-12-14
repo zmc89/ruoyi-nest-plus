@@ -5284,8 +5284,8 @@
             "type": "string",
             "description": "医生头像"
           },
-          "doctorTitle": {
-            "type": "string",
+          "doctorPostId": {
+            "type": "number",
             "description": "医生职称"
           },
           "doctorIntro": {
@@ -5309,7 +5309,7 @@
         "required": [
           "doctorName",
           "doctorAvatar",
-          "doctorTitle",
+          "doctorPostId",
           "doctorIntro",
           "doctorGoodAt",
           "tenantCode"
@@ -5326,8 +5326,8 @@
             "type": "string",
             "description": "医生头像"
           },
-          "doctorTitle": {
-            "type": "string",
+          "doctorPostId": {
+            "type": "number",
             "description": "医生职称"
           },
           "doctorIntro": {
@@ -5355,7 +5355,7 @@
         "required": [
           "doctorName",
           "doctorAvatar",
-          "doctorTitle",
+          "doctorPostId",
           "doctorIntro",
           "doctorGoodAt",
           "tenantCode",
