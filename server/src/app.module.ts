@@ -32,6 +32,7 @@ import { SysTenantModule } from './module/system/tenant/tenant/tenant.module';
 import { SysTenantPackageModule } from './module/system/tenant/package/package.module';
 import { DoctorModule } from './module/hospital/doctor/doctor.module'
 import { DepartmentsModule } from './module/hospital/departments/departments.module'
+import { HealthStateModule } from "./module/health/state/healthstate.module";
 
 @Global()
 @Module({
@@ -95,7 +96,8 @@ import { DepartmentsModule } from './module/hospital/departments/departments.mod
     SysTenantModule,
     SysTenantPackageModule,
     DoctorModule,
-    DepartmentsModule
+    DepartmentsModule,
+    HealthStateModule
   ],
   providers: [
     {

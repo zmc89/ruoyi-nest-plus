@@ -18,24 +18,16 @@
         />
       </el-form-item>
       <el-form-item label="职称" prop="doctorPostId">
-        <el-input
-          v-model="queryParams.doctorPostId"
-          placeholder="请输入医生职称"
-          clearable
-          @keyup.enter="handleQuery"
-        />
+        <el-select v-model="queryParams.doctorPostId" placeholder="请选择医生职称" clearable>
+          <el-option v-for="dict in sys_docter_post" :key="dict.value" :label="dict.label" :value="dict.value" />
+        </el-select>
       </el-form-item>
       <el-form-item label="所在科室" prop="doctorDeptId">
-        <el-input
-          v-model="queryParams.doctorDeptId"
-          placeholder="请输入医生所在科室"
-          clearable
-          @keyup.enter="handleQuery"
-        />
+          <el-tree-select v-model="queryParams.doctorDeptId" :data="deptOptions" :props="{ value: 'hospitalDeptId', label: 'deptName', children: 'children' }" value-key="id" placeholder="请选择归属部门" check-strictly />
       </el-form-item>
       <el-form-item label="状态" prop="status">
         <el-select v-model="queryParams.status" placeholder="请选择状态" clearable>
-          <el-option label="请选择字典生成" value="" />
+         <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label" :value="dict.value" />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -106,6 +98,7 @@
 </template>
 <script setup>
 import { listDoctor, getDoctor, delDoctor, addDoctor, updateDoctor } from "@/api/hospital/doctor";
+import { departmentsTreeSelect } from '@/api/hospital/departments'
 const { proxy } = getCurrentInstance();
 
 import { ref } from 'vue'
@@ -113,6 +106,11 @@ const loading = ref(false);
 const total = ref(0);
 const doctorList = ref([]);
 const showSearch = ref(true);
+const single = ref(true);
+const multiple = ref(true);
+const deptOptions = ref([])
+const { sys_docter_post } = proxy.useDict('sys_docter_post')
+const { sys_normal_disable } = proxy.useDict('sys_normal_disable')
 const queryParams = ref({
   pageNum: 1,
   pageSize: 10,
@@ -151,6 +149,12 @@ const handleDelete = (row) => {
     })
 };
 
+const getDept =() => {
+  departmentsTreeSelect().then(res => {
+    deptOptions.value = res.data
+  })
+}
+
 const getList = () => {
   loading.value = true
   listDoctor(queryParams.value).then((res) => {
@@ -159,6 +163,7 @@ const getList = () => {
     loading.value = false
   });
 };
+getDept()
 getList()
 </script>
 

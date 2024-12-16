@@ -11,7 +11,7 @@
  Target Server Version : 80040
  File Encoding         : 65001
 
- Date: 14/12/2024 02:57:43
+ Date: 16/12/2024 01:31:11
 */
 
 SET NAMES utf8mb4;
@@ -46,14 +46,15 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime(6) NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6) COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table
 -- ----------------------------
 INSERT INTO `gen_table` VALUES (1, 'sys_tenant_package', '租户套餐表', NULL, NULL, 'SysTenantPackage', 'crud', 'element-plus', 'system', 'system', 'package', '租户套餐表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-06 21:25:25.774481', '', '2024-12-06 21:25:25.774481', NULL);
-INSERT INTO `gen_table` VALUES (2, 'hospital_doctor', '医生表', NULL, NULL, 'HospitalDoctor', 'crud', 'element-plus', 'system', 'system', 'doctor', '医生表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-13 00:30:12.208903', '', '2024-12-13 00:30:12.208903', NULL);
-INSERT INTO `gen_table` VALUES (6, 'hospital_departments', '医院科室表', NULL, NULL, 'HospitalDepartments', 'crud', 'element-plus', 'system', 'system', 'departments', '医院科室表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-13 23:11:20.147925', '', '2024-12-13 23:11:20.147925', NULL);
+INSERT INTO `gen_table` VALUES (7, 'hospital_departments', '医院科室表', NULL, NULL, 'HospitalDepartments', 'crud', 'element-plus', 'system', 'system', 'departments', '医院科室表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-14 22:22:52.355296', '', '2024-12-14 22:22:52.355296', NULL);
+INSERT INTO `gen_table` VALUES (8, 'hospital_doctor', '医生表', NULL, NULL, 'HospitalDoctor', 'crud', 'element-plus', 'system', 'system', 'doctor', '医生表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-14 22:23:08.790662', '', '2024-12-14 22:23:08.790662', NULL);
+INSERT INTO `gen_table` VALUES (10, 'health_state', '健康状态辩证表', NULL, NULL, 'HealthState', 'crud', 'element-plus', 'system', 'system', 'state', '健康状态辩证表', 'nestAdmin', '0', '/', '', '0', '0', 'admin', '2024-12-15 22:30:23.954696', '', '2024-12-15 22:30:23.954696', NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -87,7 +88,7 @@ CREATE TABLE `gen_table_column`  (
   `column_default` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '默认值',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 79 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 139 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -103,35 +104,52 @@ INSERT INTO `gen_table_column` VALUES (8, 1, 'create_time', '创建时间', 'dat
 INSERT INTO `gen_table_column` VALUES (9, 1, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 9, '0', '0', 'admin', '2024-12-06 21:25:25.000000', 'admin', '2024-12-06 21:25:25.000000', '', NULL);
 INSERT INTO `gen_table_column` VALUES (10, 1, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 10, '0', '0', 'admin', '2024-12-06 21:25:25.000000', 'admin', '2024-12-06 21:25:25.000000', 'CURRENT_TIMESTAMP(6)', NULL);
 INSERT INTO `gen_table_column` VALUES (11, 1, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-06 21:25:25.000000', 'admin', '2024-12-06 21:25:25.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (12, 2, 'status', '状态', 'char', 'String', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 1, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', '0', NULL);
-INSERT INTO `gen_table_column` VALUES (13, 2, 'del_flag', '删除标志', 'char', 'String', 'delFlag', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 2, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', '0', NULL);
-INSERT INTO `gen_table_column` VALUES (14, 2, 'create_by', '创建者', 'varchar', 'String', 'createBy', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 3, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', '', NULL);
-INSERT INTO `gen_table_column` VALUES (15, 2, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '0', '0', '0', '1', 'BETWEEN', 'datetime', '', 4, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', 'CURRENT_TIMESTAMP(6)', NULL);
-INSERT INTO `gen_table_column` VALUES (16, 2, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 5, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', '', NULL);
-INSERT INTO `gen_table_column` VALUES (17, 2, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 6, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', 'CURRENT_TIMESTAMP(6)', NULL);
-INSERT INTO `gen_table_column` VALUES (18, 2, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (19, 2, 'doctor_id', '医生ID', 'int', 'Number', 'doctorId', '1', '1', '0', '0', '1', '1', '1', 'EQ', 'input', '', 8, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (20, 2, 'doctor_name', '医生姓名', 'varchar', 'String', 'doctorName', '0', '0', '0', '1', '1', '1', '1', 'LIKE', 'input', '', 9, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (21, 2, 'doctor_avatar', '医生头像', 'varchar', 'String', 'doctorAvatar', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 10, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (22, 2, 'doctor_title', '医生职称', 'varchar', 'String', 'doctorTitle', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (23, 2, 'doctor_intro', '医生简介', 'varchar', 'String', 'doctorIntro', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 12, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (24, 2, 'doctor_good_at', '医生擅长', 'varchar', 'String', 'doctorGoodAt', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 13, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (25, 2, 'is_recommend', '是否推荐', 'int', 'Number', 'isRecommend', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 14, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (26, 2, 'tenant_code', '医院ID', 'varchar', 'String', 'tenantCode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 15, '0', '0', 'admin', '2024-12-13 00:30:12.000000', 'admin', '2024-12-13 00:30:12.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (65, 6, 'status', '状态', 'char', 'String', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 1, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '0', NULL);
-INSERT INTO `gen_table_column` VALUES (66, 6, 'del_flag', '删除标志', 'char', 'String', 'delFlag', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 2, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '0', NULL);
-INSERT INTO `gen_table_column` VALUES (67, 6, 'create_by', '创建者', 'varchar', 'String', 'createBy', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 3, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '', NULL);
-INSERT INTO `gen_table_column` VALUES (68, 6, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '0', '0', '0', '1', 'BETWEEN', 'datetime', '', 4, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', 'CURRENT_TIMESTAMP(6)', NULL);
-INSERT INTO `gen_table_column` VALUES (69, 6, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 5, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '', NULL);
-INSERT INTO `gen_table_column` VALUES (70, 6, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 6, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', 'CURRENT_TIMESTAMP(6)', NULL);
-INSERT INTO `gen_table_column` VALUES (71, 6, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (72, 6, 'hospital_dept_id', '科室id', 'int', 'Number', 'hospitalDeptId', '1', '1', '0', '0', '1', '1', '1', 'EQ', 'input', '', 8, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (73, 6, 'dept_name', '科室名称', 'varchar', 'String', 'deptName', '0', '0', '0', '1', '1', '1', '1', 'LIKE', 'input', '', 9, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (74, 6, 'parent_id', '父级科室', 'int', 'Number', 'parentId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 10, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '0', NULL);
-INSERT INTO `gen_table_column` VALUES (75, 6, 'tenant_code', '所属医院', 'varchar', 'String', 'tenantCode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', '000000', NULL);
-INSERT INTO `gen_table_column` VALUES (76, 6, 'sort', '排序', 'int', 'Number', 'sort', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 12, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (77, 6, 'leader', '科室负责人', 'varchar', 'String', 'leader', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 13, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
-INSERT INTO `gen_table_column` VALUES (78, 6, 'phone', '科室负责人电话', 'varchar', 'String', 'phone', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 14, '0', '0', 'admin', '2024-12-13 23:11:20.000000', 'admin', '2024-12-13 23:11:20.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (79, 7, 'status', '状态', 'char', 'String', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 1, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (80, 7, 'del_flag', '删除标志', 'char', 'String', 'delFlag', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 2, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (81, 7, 'create_by', '创建者', 'varchar', 'String', 'createBy', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 3, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (82, 7, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '0', '0', '0', '1', 'BETWEEN', 'datetime', '', 4, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (83, 7, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 5, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (84, 7, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 6, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (85, 7, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (86, 7, 'hospital_dept_id', '科室id', 'int', 'Number', 'hospitalDeptId', '1', '1', '0', '0', '1', '1', '1', 'EQ', 'input', '', 8, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (87, 7, 'dept_name', '科室名称', 'varchar', 'String', 'deptName', '0', '0', '0', '1', '1', '1', '1', 'LIKE', 'input', '', 9, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (88, 7, 'parent_id', '父级科室', 'int', 'Number', 'parentId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 10, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (89, 7, 'tenant_code', '所属医院', 'varchar', 'String', 'tenantCode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '000000', NULL);
+INSERT INTO `gen_table_column` VALUES (90, 7, 'sort', '排序', 'int', 'Number', 'sort', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 12, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (91, 7, 'leader', '科室负责人', 'varchar', 'String', 'leader', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 13, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (92, 7, 'phone', '科室负责人电话', 'varchar', 'String', 'phone', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 14, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (93, 7, 'ancestors', '祖级列表', 'varchar', 'String', 'ancestors', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 15, '0', '0', 'admin', '2024-12-14 22:22:52.000000', 'admin', '2024-12-14 22:22:52.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (94, 8, 'status', '状态', 'char', 'String', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 1, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (95, 8, 'del_flag', '删除标志', 'char', 'String', 'delFlag', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 2, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (96, 8, 'create_by', '创建者', 'varchar', 'String', 'createBy', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 3, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (97, 8, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '0', '0', '0', '1', 'BETWEEN', 'datetime', '', 4, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (98, 8, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 5, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (99, 8, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 6, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (100, 8, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (101, 8, 'doctor_id', '医生ID', 'int', 'Number', 'doctorId', '1', '1', '0', '0', '1', '1', '1', 'EQ', 'input', '', 8, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (102, 8, 'doctor_name', '医生姓名', 'varchar', 'String', 'doctorName', '0', '0', '0', '1', '1', '1', '1', 'LIKE', 'input', '', 9, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (103, 8, 'doctor_avatar', '医生头像', 'varchar', 'String', 'doctorAvatar', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 10, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (104, 8, 'doctor_intro', '医生简介', 'varchar', 'String', 'doctorIntro', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (105, 8, 'doctor_good_at', '医生擅长', 'varchar', 'String', 'doctorGoodAt', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 12, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (106, 8, 'is_recommend', '是否首页推荐', 'int', 'Number', 'isRecommend', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 13, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (107, 8, 'tenant_code', '医院ID', 'varchar', 'String', 'tenantCode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 14, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (108, 8, 'doctor_phone', '医生联系方式', 'varchar', 'String', 'doctorPhone', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 15, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (109, 8, 'doctor_post_id', '医生职称', 'int', 'Number', 'doctorPostId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 16, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (110, 8, 'doctor_dept_id', '医生所在科室', 'int', 'Number', 'doctorDeptId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 17, '0', '0', 'admin', '2024-12-14 22:23:08.000000', 'admin', '2024-12-14 22:23:08.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (125, 10, 'status', '状态', 'char', 'String', 'status', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'radio', '', 1, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (126, 10, 'del_flag', '删除标志', 'char', 'String', 'delFlag', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 2, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', '0', NULL);
+INSERT INTO `gen_table_column` VALUES (127, 10, 'create_by', '创建者', 'varchar', 'String', 'createBy', '0', '0', '0', '0', '0', '0', '1', 'EQ', 'input', '', 3, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (128, 10, 'create_time', '创建时间', 'datetime', 'Date', 'createTime', '0', '0', '0', '0', '0', '0', '1', 'BETWEEN', 'datetime', '', 4, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (129, 10, 'update_by', '更新者', 'varchar', 'String', 'updateBy', '0', '0', '0', '1', '1', '0', '1', 'EQ', 'input', '', 5, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', '', NULL);
+INSERT INTO `gen_table_column` VALUES (130, 10, 'update_time', '更新时间', 'datetime', 'Date', 'updateTime', '0', '0', '0', '1', '1', '0', '1', 'BETWEEN', 'datetime', '', 6, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', 'CURRENT_TIMESTAMP(6)', NULL);
+INSERT INTO `gen_table_column` VALUES (131, 10, 'remark', '备注', 'varchar', 'String', 'remark', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 7, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (132, 10, 'health_state_id', '健康状态辩证id', 'int', 'Number', 'healthStateId', '1', '1', '0', '0', '1', '1', '1', 'EQ', 'input', '', 8, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (133, 10, 'health_state_tag', '健康状态标签', 'varchar', 'String', 'healthStateTag', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 9, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (134, 10, 'health_state_content', '健康状态内容', 'longtext', 'String', 'healthStateContent', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'editor', '', 10, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (135, 10, 'health_state_desc', '健康状态描述', 'varchar', 'String', 'healthStateDesc', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 11, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (136, 10, 'health_state_img', '健康状态图片', 'longtext', 'String', 'healthStateImg', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'textarea', '', 12, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
+INSERT INTO `gen_table_column` VALUES (137, 10, 'tenant_code', '所属医院', 'varchar', 'String', 'tenantCode', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 13, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', '000000', NULL);
+INSERT INTO `gen_table_column` VALUES (138, 10, 'user_id', '关联用户id', 'int', 'Number', 'userId', '0', '0', '0', '1', '1', '1', '1', 'EQ', 'input', '', 14, '0', '0', 'admin', '2024-12-15 22:30:26.000000', 'admin', '2024-12-15 22:30:26.000000', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for health_information
@@ -147,7 +165,7 @@ CREATE TABLE `health_information`  (
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   `health_information_id` int NOT NULL AUTO_INCREMENT COMMENT '健康资讯id',
   PRIMARY KEY (`health_information_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '健康资讯' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '健康资讯' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of health_information
@@ -168,9 +186,12 @@ CREATE TABLE `health_state`  (
   `health_state_id` int NOT NULL AUTO_INCREMENT COMMENT '健康状态辩证id',
   `health_state_tag` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '健康状态标签',
   `health_state_content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '健康状态内容',
+  `health_state_img` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '健康状态图片',
+  `tenant_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '000000' COMMENT '所属医院',
+  `user_id` int NOT NULL COMMENT '关联用户id',
   `health_state_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '健康状态描述',
   PRIMARY KEY (`health_state_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '健康状态辩证表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '健康状态辩证表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of health_state
@@ -197,7 +218,7 @@ CREATE TABLE `hospital_departments`  (
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '科室负责人电话',
   `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '祖级列表',
   PRIMARY KEY (`hospital_dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '医院科室表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '医院科室表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of hospital_departments
@@ -254,7 +275,7 @@ CREATE TABLE `sys_config`  (
   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '状态',
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '删除标志',
   PRIMARY KEY (`config_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '参数配置表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_config
@@ -365,6 +386,10 @@ INSERT INTO `sys_dict_data` VALUES (101, '000000', 0, '主治医师', '1', 'sys_
 INSERT INTO `sys_dict_data` VALUES (102, '000000', 0, '副主任医师', '2', 'sys_docter_post', '', 'default', 'N', '0', 'admin', '2024-12-13 00:08:01.000000', '', '2024-12-13 00:08:01.718446', NULL, '0');
 INSERT INTO `sys_dict_data` VALUES (103, '000000', 0, '主任医师', '3', 'sys_docter_post', '', 'default', 'N', '0', 'admin', '2024-12-13 00:08:14.000000', '', '2024-12-13 00:08:14.770622', NULL, '0');
 INSERT INTO `sys_dict_data` VALUES (104, '000000', 0, '专家', '4', 'sys_docter_post', '', 'default', 'N', '0', 'admin', '2024-12-13 00:08:30.000000', '', '2024-12-13 00:08:30.974844', NULL, '0');
+INSERT INTO `sys_dict_data` VALUES (105, '000000', 0, '舌苔', '0', 'health_state_tag', '', 'default', 'N', '0', 'admin', '2024-12-16 01:13:51.000000', '', '2024-12-16 01:13:51.613139', NULL, '0');
+INSERT INTO `sys_dict_data` VALUES (106, '000000', 0, '脸色', '1', 'health_state_tag', '', 'default', 'N', '0', 'admin', '2024-12-16 01:14:07.000000', '', '2024-12-16 01:14:07.462384', NULL, '0');
+INSERT INTO `sys_dict_data` VALUES (107, '000000', 0, '睡眠', '3', 'health_state_tag', '', 'default', 'N', '0', 'admin', '2024-12-16 01:14:25.000000', '', '2024-12-16 01:14:25.571320', NULL, '0');
+INSERT INTO `sys_dict_data` VALUES (108, '000000', 0, '流汗', '2', 'health_state_tag', '', 'default', 'N', '0', 'admin', '2024-12-16 01:14:46.000000', '', '2024-12-16 01:14:52.000000', NULL, '0');
 
 -- ----------------------------
 -- Table structure for sys_dict_type
@@ -399,8 +424,9 @@ INSERT INTO `sys_dict_type` VALUES (7, '000000', '通知类型', 'sys_notice_typ
 INSERT INTO `sys_dict_type` VALUES (8, '000000', '通知状态', 'sys_notice_status', '0', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-05 01:26:00.090897', '通知状态列表', '0');
 INSERT INTO `sys_dict_type` VALUES (9, '000000', '操作类型', 'sys_oper_type', '0', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-05 01:26:00.754880', '操作类型列表', '0');
 INSERT INTO `sys_dict_type` VALUES (10, '000000', '系统状态', 'sys_common_status', '0', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-05 01:26:02.551973', '登录状态列表', '0');
-INSERT INTO `sys_dict_type` VALUES (100, '000000', '医院科室', 'sys_hospital_dept', '0', 'admin', '2024-12-13 00:04:36.000000', '', '2024-12-13 00:04:36.341868', NULL, '0');
+INSERT INTO `sys_dict_type` VALUES (100, '000000', '医院科室', 'sys_hospital_dept', '0', 'admin', '2024-12-13 00:04:36.000000', '', '2024-12-14 22:22:00.000000', NULL, '1');
 INSERT INTO `sys_dict_type` VALUES (101, '000000', '医生职称', 'sys_docter_post', '0', 'admin', '2024-12-13 00:06:11.000000', '', '2024-12-13 00:06:11.674311', NULL, '0');
+INSERT INTO `sys_dict_type` VALUES (102, '000000', '健康状态辩证标签', 'health_state_tag', '0', 'admin', '2024-12-16 01:13:23.000000', '', '2024-12-16 01:13:23.578989', NULL, '0');
 
 -- ----------------------------
 -- Table structure for sys_job
@@ -421,7 +447,7 @@ CREATE TABLE `sys_job`  (
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '备注信息',
   PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job
@@ -444,7 +470,7 @@ CREATE TABLE `sys_job_log`  (
   `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT '' COMMENT '异常信息',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '定时任务调度日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_job_log
@@ -471,7 +497,7 @@ CREATE TABLE `sys_logininfor`  (
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '删除标志',
   `login_time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 116 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 119 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -492,6 +518,9 @@ INSERT INTO `sys_logininfor` VALUES (112, 'admin', '::1', '福建省泉州市 �
 INSERT INTO `sys_logininfor` VALUES (113, 'admin', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '登录成功', '', '2024-12-12 23:52:30.070832', '', '2024-12-12 23:52:30.070832', NULL, '0', '2024-12-12 23:52:30.070832');
 INSERT INTO `sys_logininfor` VALUES (114, '', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '退出成功', '', '2024-12-13 23:53:25.530783', '', '2024-12-13 23:53:25.530783', NULL, '0', '2024-12-13 23:53:25.530783');
 INSERT INTO `sys_logininfor` VALUES (115, 'admin', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '登录成功', '', '2024-12-13 23:53:44.888971', '', '2024-12-13 23:53:44.888971', NULL, '0', '2024-12-13 23:53:44.888971');
+INSERT INTO `sys_logininfor` VALUES (116, '', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '退出成功', '', '2024-12-15 20:30:44.217322', '', '2024-12-15 20:30:44.217322', NULL, '0', '2024-12-15 20:30:44.217322');
+INSERT INTO `sys_logininfor` VALUES (117, '', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '退出成功', '', '2024-12-15 20:30:44.519038', '', '2024-12-15 20:30:44.519038', NULL, '0', '2024-12-15 20:30:44.519038');
+INSERT INTO `sys_logininfor` VALUES (118, 'admin', '::1', '福建省泉州市 联通', 'Chrome 131.0.0', 'Windows', '0', '登录成功', '', '2024-12-15 20:30:59.984377', '', '2024-12-15 20:30:59.984377', NULL, '0', '2024-12-15 20:30:59.984377');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -622,7 +651,7 @@ INSERT INTO `sys_menu` VALUES (2009, '租户套餐编辑', 2005, 4, '', NULL, ''
 INSERT INTO `sys_menu` VALUES (2010, '租户套餐删除', 2005, 5, '', NULL, '', '1', '0', 'F', '0', '0', 'system:tenantPackage:remove', '', '', '2024-12-07 00:07:22.874916', '', '2024-12-07 00:07:22.874916', NULL, '0');
 INSERT INTO `sys_menu` VALUES (2011, '套餐租户导出', 2005, 6, '', NULL, '', '1', '0', 'F', '0', '0', 'system:tenantPackage:export', '', '', '2024-12-07 00:08:03.070045', '', '2024-12-07 00:08:03.070045', NULL, '0');
 INSERT INTO `sys_menu` VALUES (2012, '租户管理', 2002, 0, 'list', 'tenant/list/index', '', '1', '0', 'C', '0', '0', 'system:tenant:list', 'list', '', '2024-12-09 23:08:59.381589', '', '2024-12-09 23:08:59.381589', NULL, '0');
-INSERT INTO `sys_menu` VALUES (2013, '医院管理', 0, 0, 'hospital', NULL, '', '1', '0', 'M', '0', '0', '', 'date-range', '', '2024-12-13 22:21:43.355003', '', '2024-12-13 22:25:22.000000', NULL, '0');
+INSERT INTO `sys_menu` VALUES (2013, '医院管理', 0, 0, 'hospital', NULL, '', '1', '0', 'M', '0', '0', '', 'date-range', '', '2024-12-13 22:21:43.355003', '', '2024-12-15 22:40:36.000000', NULL, '0');
 INSERT INTO `sys_menu` VALUES (2014, '医生管理', 2013, 0, 'doctor', 'hospital/doctor/index', '', '1', '0', 'C', '0', '0', 'hospital:doctor:list', 'people', '', '2024-12-13 22:23:15.718892', '', '2024-12-13 22:49:07.000000', NULL, '1');
 INSERT INTO `sys_menu` VALUES (2015, '科室管理', 2013, 1, 'departments', NULL, '', '1', '0', 'M', '0', '0', '', 'monitor', '', '2024-12-13 22:48:53.307975', '', '2024-12-13 22:49:05.000000', NULL, '1');
 INSERT INTO `sys_menu` VALUES (2016, '科室管理', 2013, 1, 'departments', 'hospital/departments/index', '', '1', '0', 'C', '0', '0', 'hospital:departments:list', 'monitor', '', '2024-12-13 22:50:36.934955', '', '2024-12-13 22:50:36.934955', NULL, '0');
@@ -635,6 +664,8 @@ INSERT INTO `sys_menu` VALUES (2022, '新增', 2017, 0, '', NULL, '', '1', '0', 
 INSERT INTO `sys_menu` VALUES (2023, '修改', 2017, 1, '', NULL, '', '1', '0', 'F', '0', '0', 'hospital:doctor:edit', '', '', '2024-12-13 22:59:45.713990', '', '2024-12-13 22:59:45.713990', NULL, '0');
 INSERT INTO `sys_menu` VALUES (2024, '详情', 2017, 3, '', NULL, '', '1', '0', 'F', '0', '0', 'hospital:doctor:query', '', '', '2024-12-13 23:00:00.685362', '', '2024-12-13 23:00:00.685362', NULL, '0');
 INSERT INTO `sys_menu` VALUES (2025, '删除', 2017, 3, '', NULL, '', '1', '0', 'F', '0', '0', 'hospital:doctor:remove', '', '', '2024-12-13 23:00:18.754171', '', '2024-12-13 23:00:18.754171', NULL, '0');
+INSERT INTO `sys_menu` VALUES (2026, '健康管理', 0, 0, 'health', NULL, '', '1', '0', 'M', '0', '0', '', 'redis-list', '', '2024-12-15 22:40:14.682274', '', '2024-12-15 22:40:28.000000', NULL, '0');
+INSERT INTO `sys_menu` VALUES (2027, '健康状态辩证', 2026, 0, 'state', 'health/state/index', '', '1', '0', 'C', '0', '0', '', 'time', '', '2024-12-15 22:42:04.883384', '', '2024-12-15 22:42:04.883384', NULL, '0');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -654,7 +685,7 @@ CREATE TABLE `sys_notice`  (
   `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '删除标志',
   `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -685,7 +716,7 @@ CREATE TABLE `sys_oper_log`  (
   `oper_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '主机地址',
   `oper_time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -982,8 +1013,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, '000000', 103, 'admin', 'nest-admin', '00', 'ry@163.com', '15888888888', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '::1', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-13 23:53:44.000000', '管理员', '', '2024-12-13 23:53:45');
-INSERT INTO `sys_user` VALUES (2, '', 105, 'ry', 'nest-admin', '00', 'ry@qq.com', '15666666666', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', NULL, '测试员', '', '2024-12-13 23:53:44.000000');
+INSERT INTO `sys_user` VALUES (1, '000000', 103, 'admin', 'nest-admin', '00', 'ry@163.com', '15888888888', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '::1', 'admin', '2024-12-05 00:54:45.000000', '', '2024-12-15 20:30:59.000000', '管理员', '', '2024-12-15 20:31:00');
+INSERT INTO `sys_user` VALUES (2, '', 105, 'ry', 'nest-admin', '00', 'ry@qq.com', '15666666666', '1', '$2b$10$d4Z9Iq.v9J4pjX55I9mzRuPHsOMKLupOqxlb/UfbD9oYsYxd5ezeS', '0', '0', '127.0.0.1', 'admin', '2024-12-05 00:54:45.000000', '', NULL, '测试员', '', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for sys_user_post

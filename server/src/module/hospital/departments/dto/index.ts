@@ -43,9 +43,12 @@ export class UpdateDepartmentsDto extends CreateDepartmentsDto {
 
 export class QueryDepartmentsDto {
     @ApiProperty({required: false , description: '科室名称'})
+    @IsOptional()
+    @IsString()
     deptName?: string;
 
     @ApiProperty({required: false , description: '状态'})
+    @IsOptional()
     status?: string;
 }
 

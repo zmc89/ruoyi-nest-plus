@@ -67,4 +67,13 @@ export class DepartmentsController {
     remove(@Param('id') id: string) {
         return this.departmentsService.remove(+id);
     }
+
+    @ApiOperation({
+        summary: '医院科室树',
+    })
+    @RequirePermission('hospital:departments:query')
+    @Get('/departmentsTree')
+    departmentsTree() {
+        return this.departmentsService.departmentsTree();
+    }
 }

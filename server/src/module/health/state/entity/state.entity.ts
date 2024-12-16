@@ -17,6 +17,12 @@ export class HealthStateEntity extends BaseEntity {
   @Column({type:'longtext',name:'health_state_content',comment:'健康状态内容'})
   healthStateContent: string;
 
-  @Column({type:'varchar',name:'health_state_desc',comment:'健康状态描述'})
-  healthStateDesc: string;
+  @Column({type:'longtext',name:'health_state_img',comment:'健康状态图片'})
+  healthStateImg: string;
+
+ @Column({type:'varchar',name:'tenant_code',comment:'所属医院',default:'000000'})
+ tenantCode: string;
+
+ @Column({type:'int',name:'user_id',comment:'关联用户id'})
+  userId: number;
 }

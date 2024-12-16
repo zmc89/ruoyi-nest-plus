@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 import { ResultData } from 'src/common/utils/result';
 import { CreateDepartmentsDto, UpdateDepartmentsDto, QueryDepartmentsDto } from './dto/index';
 import { HospitalDepartmentsEntity } from './entity/departments.entity';
-import {CreateDeptDto} from "../../system/dept/dto";
+import { ListToTree } from 'src/common/utils/index';
 
 @Injectable()
 export class DepartmentsService {
@@ -35,11 +35,11 @@ Object.assign(createDepartmentsDto, { ancestors: ancestors });
     async findAll(query :QueryDepartmentsDto ) {
         const entity = this.departmentsEntityRep.createQueryBuilder('entity');
         entity.where({ delFlag: '0'});
-        if(query.status){
-            entity.andWhere("entity.status = :status", {status: query.status});
-        }
         if(query.deptName){
             entity.andWhere("entity.deptName LIKE :deptName", {deptName: `%${query.deptName}%`});
+        }
+        if(query.status){
+            entity.andWhere("entity.status = :status", {status: query.status});
         }
         const res = await entity.getMany();
         return ResultData.ok(res);
@@ -78,5 +78,23 @@ Object.assign(createDepartmentsDto, { ancestors: ancestors });
             },
         );
         return ResultData.ok({value:res.affected >= 1});
+    }
+
+    /**
+     * 部门树
+     * @returns
+     */
+    async departmentsTree() {
+        const res = await this.departmentsEntityRep.find({
+            where: {
+                delFlag: '0',
+            },
+        });
+        const tree = ListToTree(
+            res,
+            (m) => m.hospitalDeptId,
+            (m) => m.deptName,
+        );
+        return tree;
     }
 }

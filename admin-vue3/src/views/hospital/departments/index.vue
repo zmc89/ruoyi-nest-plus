@@ -159,8 +159,8 @@ const refreshTable = ref(true);
 const data = reactive({
   form: {},
   queryParams: {
-    deptName: undefined,
-    status: undefined
+    deptName: null,
+    status: null
   },
   rules: {
     parentId: [{ required: true, message: "上级科室不能为空", trigger: "blur" }],
@@ -187,12 +187,12 @@ function cancel() {
 /** 表单重置 */
 function reset() {
   form.value = {
-    hospitalDeptId: undefined,
-    parentId: undefined,
-    deptName: undefined,
+    hospitalDeptId: null,
+    parentId: null,
+    deptName: null,
     sort: 0,
-    leader: undefined,
-    phone: undefined,
+    leader: null,
+    phone: null,
     status: "0"
   };
   proxy.resetForm("deptRef");
@@ -212,7 +212,7 @@ function handleAdd(row) {
   listDepartments().then(response => {
     deptOptions.value = proxy.handleTree(response.data, "hospitalDeptId");
   });
-  if (row != undefined) {
+  if (row != undefined && row.hospitalDeptId != null) {
     form.value.parentId = +row.hospitalDeptId;
   }
   open.value = true;

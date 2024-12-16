@@ -50,3 +50,12 @@ export function listDeptExcludeChild(hospitalDeptId) {
   })
 }
 
+// 查询科室下拉树结构
+export function departmentsTreeSelect() {
+  return request({
+    url: '/hospital/departments/departmentsTree',
+    method: 'get'
+  })
+}
+
+

@@ -4027,6 +4027,224 @@
           "医院科室表"
         ]
       }
+    },
+    "/hospital/departments/departmentsTree": {
+      "get": {
+        "operationId": "DepartmentsController_departmentsTree",
+        "summary": "医院科室树",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "医院科室表"
+        ]
+      }
+    },
+    "/health/state": {
+      "post": {
+        "operationId": "HealthStateController_create",
+        "summary": "健康状态辩证表-创建",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateStateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "健康状态辩证表"
+        ]
+      },
+      "put": {
+        "operationId": "HealthStateController_update",
+        "summary": "健康状态辩证表-修改",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateStateDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ResultData"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean",
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "健康状态辩证表"
+        ]
+      }
+    },
+    "/health/state/list": {
+      "get": {
+        "operationId": "HealthStateController_findAll",
+        "summary": "健康状态辩证表-列表",
+        "parameters": [
+          {
+            "name": "pageNum",
+            "required": true,
+            "in": "query",
+            "description": "当前分页",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": true,
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "orderByColumn",
+            "required": false,
+            "in": "query",
+            "description": "排序字段",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "isAsc",
+            "required": false,
+            "in": "query",
+            "description": "排序规则",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userName",
+            "required": false,
+            "in": "query",
+            "description": "用户名称",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "健康状态辩证表"
+        ]
+      }
+    },
+    "/health/state/{id}": {
+      "get": {
+        "operationId": "HealthStateController_findOne",
+        "summary": "健康状态辩证表-详情",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "健康状态辩证表"
+        ]
+      },
+      "delete": {
+        "operationId": "HealthStateController_remove",
+        "summary": "健康状态辩证表-删除",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ResultData"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "value": {
+                              "type": "boolean",
+                              "default": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "健康状态辩证表"
+        ]
+      }
     }
   },
   "info": {
@@ -5449,6 +5667,72 @@
           "sort",
           "hospitalDeptId"
         ]
+      },
+      "CreateStateDto": {
+        "type": "object",
+        "properties": {
+          "healthStateId": {
+            "type": "number",
+            "description": "健康状态辩证id"
+          },
+          "healthStateTag": {
+            "type": "string",
+            "description": "健康状态标签"
+          },
+          "healthStateContent": {
+            "type": "string",
+            "description": "健康状态内容"
+          },
+          "healthStateDesc": {
+            "type": "string",
+            "description": "健康状态描述"
+          },
+          "healthStateImg": {
+            "type": "string",
+            "description": "健康状态图片"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "所属医院"
+          },
+          "userId": {
+            "type": "number",
+            "description": "关联用户id"
+          }
+        }
+      },
+      "UpdateStateDto": {
+        "type": "object",
+        "properties": {
+          "healthStateId": {
+            "type": "number",
+            "description": "健康状态id"
+          },
+          "healthStateTag": {
+            "type": "string",
+            "description": "健康状态标签"
+          },
+          "healthStateContent": {
+            "type": "string",
+            "description": "健康状态内容"
+          },
+          "healthStateDesc": {
+            "type": "string",
+            "description": "健康状态描述"
+          },
+          "healthStateImg": {
+            "type": "string",
+            "description": "健康状态图片"
+          },
+          "tenantCode": {
+            "type": "string",
+            "description": "所属医院"
+          },
+          "userId": {
+            "type": "number",
+            "description": "关联用户id"
+          }
+        }
       }
     }
   }
